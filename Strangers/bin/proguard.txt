@@ -1,0 +1,3 @@
+# view AndroidManifest.xml #generated:31
+-keep class fr.utt.if26.td05.PhonegapTest { <init>(...); }
+

@@ -1,0 +1,11 @@
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes.dex : \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\BuildConfig.class \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\PhonegapTest.class \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\R$attr.class \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\R$drawable.class \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\R$layout.class \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\R$string.class \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\R$xml.class \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\bin\classes\fr\utt\if26\td05\R.class \
+C:\Program Files (x86)\Android\android-sdk\tools\support\annotations.jar \
+C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\TD 05 - Phonegap\libs\cordova-2.1.0.jar \
