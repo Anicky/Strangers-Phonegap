@@ -1,9 +1,9 @@
-package fr.utt.if26.td05;
+package fr.utt.if26.strangers_phonegap;
 
 import android.os.Bundle;
 import org.apache.cordova.DroidGap;
 
-public class PhonegapTest extends DroidGap {
+public class Strangers extends DroidGap {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
