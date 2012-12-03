@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Strangers (version Phonegap)</title>
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.2.0.js"></script>
+    </head>
+    <body>
+        <!-- Options de recherche -->
+        <div data-role="page" id="page1">
+            <div data-theme="" data-role="header">
+                <h3>
+                    Strangers
+                </h3>
+            </div>
+            <div data-role="content">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li>
+                            <a href="#page1" data-theme="" data-icon="">
+                                Comptes email
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#page1" data-theme="" data-icon="" class="ui-btn-active ui-state-persist">
+                                Recherche
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <form action="#" method="POST">
+                    <div id="checkboxes1" data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-type="vertical">
+                            <legend>
+                                Rechercher dans :
+                            </legend>
+                            <input id="checkbox1" name="boite-de-reception" type="checkbox" />
+                            <label for="checkbox1">
+                                Boîte de réception
+                            </label>
+                            <input id="checkbox6" name="brouillons" type="checkbox" />
+                            <label for="checkbox6">
+                                Brouillons
+                            </label>
+                            <input id="checkbox3" name="messages-envoyes" type="checkbox" />
+                            <label for="checkbox3">
+                                Messages envoyés
+                            </label>
+                            <input id="checkbox5" name="archives" type="checkbox" />
+                            <label for="checkbox5">
+                                Archives
+                            </label>
+                            <input id="checkbox2" name="courrier-indesirable" type="checkbox" />
+                            <label for="checkbox2">
+                                Courrier indésirable (Spams)
+                            </label>
+                            <input id="checkbox4" name="corbeille" type="checkbox" />
+                            <label for="checkbox4">
+                                Corbeille
+                            </label>
+                        </fieldset>
+                    </div>
+                    <input data-icon="check" data-iconpos="left" value="Sauvegarder" type="submit" />
+                </form>
+                <a data-role="button" data-transition="flip" href="#page1" data-icon="back" data-iconpos="left">
+                    Retour
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
