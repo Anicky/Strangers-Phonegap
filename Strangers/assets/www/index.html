@@ -9,16 +9,31 @@
         <script src="js/jquery.mobile-1.2.0.js"></script>
     </head>
     <body>
-        <div class="app">
-            <h1>Strangers (version Phonegap)</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">En cours de connexion...</p>
-                <p class="event received">L'appareil est prêt !</p>
+        <!-- Page d'accueil -->
+        <div data-role="page" id="page1">
+            <div data-theme="" data-role="header">
+                <h3>
+                    Strangers
+                </h3>
             </div>
-            <a data-role="button" data-transition="slide" href="comptes-liste.html" data-icon="gear" data-iconpos="left">
+            <div data-role="content">
+                <a data-role="button" data-transition="flip" href="comptes-liste.html" data-icon="gear" data-iconpos="left">
                     Configuration
-            </a>
-      </div>
+                </a>
+                <form action="ajout" method="POST">
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="textinput1">Numéro de téléphone</label>
+                            <input name="telephone" id="textinput1" placeholder="" value="" type="tel" />
+                        </fieldset>
+                    </div>
+                    <a data-role="button" data-transition="flip" href="journal-appels.html" data-icon="info" data-iconpos="left">
+                        Journal d'appels
+                    </a>
+                    <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
+                </form>
+            </div>
+        </div>
         <script type="text/javascript" src="js/cordova-2.2.0.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">

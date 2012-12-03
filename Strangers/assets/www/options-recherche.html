@@ -10,8 +10,8 @@
     </head>
     <body>
         <!-- Options de recherche -->
-        <div data-role="page" id="page1">
-            <div data-theme="" data-role="header">
+        <div data-role="page">
+            <div data-role="header">
                 <h3>
                     Strangers
                 </h3>
@@ -31,7 +31,7 @@
                         </li>
                     </ul>
                 </div>
-                <form action="#" method="POST">
+                <form action="#" method="post">
                     <div id="checkboxes1" data-role="fieldcontain">
                         <fieldset data-role="controlgroup" data-type="vertical">
                             <legend>
@@ -70,5 +70,10 @@
                 </a>
             </div>
         </div>
+        <script type="text/javascript" src="js/cordova-2.2.0.js"></script>
+        <script type="text/javascript" src="js/index.js"></script> 
+        <script type="text/javascript">
+            app.initialize();
+        </script>
     </body>
 </html>
