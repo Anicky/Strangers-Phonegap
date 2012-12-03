@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.min.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.structure.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.structure.min.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.theme.css" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.theme.min.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.custom/jquery.mobile.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile.custom/jquery.mobile.custom.js"></script>
+    </head>
+    <body>
+        <div class="app" data-role="page" id="page1">
+            <div data-theme="a" data-role="header">
+                <h2>Stangers</h2>
+            </div>
+            <div data-role="content" style="padding: 20px">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput1">
+                        </label>
+                        <input name="" id="textinput1" placeholder="" value="" type="tel" />
+                    </fieldset>
+                </div>
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                  <li data-role="list-divider" role="heading">
+                        Votre choix
+                    </li> 
+                    <li data-theme="c">
+                        <a href="journalAppel.html" data-transition="none">
+                            Journal d'appel
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#" data-transition="slide">
+                            Configuration
+                        </a>
+                    </li>
+                </ul>
+                <input type="submit" data-icon="search" data-iconpos="right" value="Recherche" />
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h5>
+                    IF26-A2012
+                </h5>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/cordova-2.2.0.js"></script>
+        <script type="text/javascript" src="js/index.js"></script> 
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
