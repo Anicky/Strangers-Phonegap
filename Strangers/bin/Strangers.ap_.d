@@ -14,9 +14,6 @@ C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Se
 C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\comptes-ajouter.html \
 C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\comptes-liste.html \
 C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\fonts \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\html \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\img \
 C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\index.html \
 C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\js \
 C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\options-recherche.html \
