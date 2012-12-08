@@ -1,2 +1,2 @@
-C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\AndroidManifest.xml : \
-C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\AndroidManifest.xml \
+C:\Users\Jeremie\Documents\Projets Programmation\Strangers-Phonegap\Strangers\bin\AndroidManifest.xml : \
+C:\Users\Jeremie\Documents\Projets Programmation\Strangers-Phonegap\Strangers\AndroidManifest.xml \
