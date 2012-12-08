@@ -1,39 +1,39 @@
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\Strangers.ap_ \
- : C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\res\drawable-hdpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\res\drawable-ldpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\res\drawable-mdpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\res\drawable-xhdpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\res\layout\main.xml \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\res\values\strings.xml \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\res\xml\config.xml \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\res\drawable-hdpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\res\drawable-ldpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\res\drawable-mdpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\res\drawable-xhdpi\ic_launcher.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\comptes-ajouter.html \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\comptes-liste.html \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\index-ancien.html \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\index.html \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\journal-appels.html \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\js \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\options-recherche.html \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\images \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\jquery.mobile-1.2.0.css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\jquery.mobile-1.2.0.min.css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\jquery.mobile.structure-1.2.0.css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\jquery.mobile.structure-1.2.0.min.css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\jquery.mobile.theme-1.2.0.css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\jquery.mobile.theme-1.2.0.min.css \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\images\ajax-loader.gif \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\images\icons-18-black.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\images\icons-18-white.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\images\icons-36-black.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\css\images\icons-36-white.png \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\js\cordova-2.2.0.js \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\js\index.js \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\js\jquery.js \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\js\jquery.mobile-1.2.0.js \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\assets\www\js\jquery.mobile-1.2.0.min.js \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\AndroidManifest.xml \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\Strangers.ap_ \
+ : C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\res\drawable-hdpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\res\drawable-ldpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\res\drawable-mdpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\res\drawable-xhdpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\res\layout\main.xml \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\res\values\strings.xml \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\res\xml\config.xml \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\res\drawable-hdpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\res\drawable-ldpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\res\drawable-mdpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\res\drawable-xhdpi\ic_launcher.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\comptes-ajouter.html \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\comptes-liste.html \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\index-ancien.html \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\index.html \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\journal-appels.html \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\js \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\options-recherche.html \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\images \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\jquery.mobile-1.2.0.css \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\jquery.mobile-1.2.0.min.css \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\jquery.mobile.structure-1.2.0.css \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\jquery.mobile.structure-1.2.0.min.css \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\jquery.mobile.theme-1.2.0.css \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\jquery.mobile.theme-1.2.0.min.css \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\images\ajax-loader.gif \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\images\icons-18-black.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\images\icons-18-white.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\images\icons-36-black.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\css\images\icons-36-white.png \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\js\cordova-2.2.0.js \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\js\index.js \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\js\jquery.js \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\js\jquery.mobile-1.2.0.js \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\assets\www\js\jquery.mobile-1.2.0.min.js \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\AndroidManifest.xml \

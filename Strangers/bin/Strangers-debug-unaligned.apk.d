@@ -1,4 +1,4 @@
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\Strangers-debug-unaligned.apk : \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\Strangers.ap_ \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes.dex \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\libs\cordova-2.2.0.jar \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\Strangers-debug-unaligned.apk : \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\Strangers.ap_ \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes.dex \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\libs\cordova-2.2.0.jar \

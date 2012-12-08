@@ -1,10 +1,10 @@
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes.dex : \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\BuildConfig.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$attr.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$drawable.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$layout.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$string.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$xml.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\Strangers.class \
-C:\Users\Jeremie\Documents\Etudes\2011 - Diplome Ingenieur Informatique (UTT)\Semestre 4\IF26 - Conception securisee d'applications - Web Mobile et Smartphones\Projet\Strangers\bin\dexedLibs\cordova-2.2.0-15c4b64dd6650aa7c7c04fc22802b9b2.jar \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes.dex : \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\BuildConfig.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$attr.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$drawable.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$layout.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$string.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R$xml.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\R.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\classes\fr\utt\if26\strangersPhonegap\Strangers.class \
+C:\Users\Mohammed\Desktop\dossier\Strangers-Phonegap\Strangers\bin\dexedLibs\cordova-2.2.0-c67b2f2da61a5e5df4f21dcd54859a27.jar \
