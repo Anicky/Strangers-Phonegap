@@ -61,10 +61,10 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
                     /* output the email header information */
                     $sortie.= '<article>';
-                    $sortie.= '<div class="toggler ' . ($apercu[0]->seen ? 'read' : 'unread') . '">';
-                    $sortie.= '<span class="subject">' . $apercu[0]->subject . '</span> ';
-                    $sortie.= '<span class="from">' . $apercu[0]->from . '</span>';
-                    $sortie.= '<span class="date">on ' . $apercu[0]->date . '</span>';
+                    $sortie.= '<div class="header-' . ($apercu[0]->seen ? 'lu' : 'non-lu') . '">';
+                    $sortie.= '<span class="sujet">Sujet : <strong>' . $apercu[0]->subject . '</strong></span> ';
+                    $sortie.= '<span class="expediteur">Expéditeur : ' . $apercu[0]->from . '</span>';
+                    $sortie.= '<span class="date">Date : <em>' . $apercu[0]->date . '</em></span>';
                     $sortie.= '</div>';
 
                     /* output the email body */

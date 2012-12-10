@@ -1,0 +1,84 @@
+/* Général */
+html, body, p, ul, li, table, h1, h2, h3, h4, h5, h6, input {
+    margin : 0;
+    padding : 0;
+}
+
+body {
+    background-color : #EEEEEE;
+    margin : 10px;
+    padding : 0;
+    font-family : Verdana, Arial, Helvetica, sans-serif;
+    color : black;
+    background-attachment : fixed;
+    font-size : 12px;
+}
+
+input, textarea, select {
+    padding : 5px;
+    font-family : Verdana;
+    font-size : 12px;
+    border : none;
+    box-shadow: 1px 1px 5px 1px #000000;
+    border-radius : 5px;
+}
+
+input[type=submit], input[type=reset], input[type=button], label.checkbox, input[type=checkbox] {
+    cursor : pointer;
+}
+
+input[type=submit]:hover, input[type=reset]:hover, input[type=button]:hover {
+    background-color : white;
+}
+
+table.formulaire {
+    text-align : center;
+    background-color : white;
+    padding : 10px;
+    border-radius : 5px;
+    box-shadow: 1px 1px 5px 1px #000000;
+}
+
+table.formulaire tr td.label {
+    text-align : right;
+    font-weight : bold;
+}
+
+table.formulaire tr td {
+    padding : 5px;
+}
+
+article {
+    background-color : white;
+    margin : 0px 0px 20px;
+    padding : 10px;
+    border-radius : 5px;
+    box-shadow: 1px 1px 5px 1px #000000;
+}
+
+.header-lu, .header-non-lu {
+    margin : 0px 0px 20px;
+    padding : 10px;
+    border-radius : 5px;
+    box-shadow: 1px 1px 5px 1px #000000;
+}
+
+.header-non-lu {
+    background-color : #CCCCCC;
+}
+
+.sujet {
+    display : block;
+}
+
+.expediteur {
+    display : block;
+}
+
+.date {
+    display : block;
+}
+
+.body {
+    text-align : justify;
+}
