@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Paramètres (obligatoires) :
  * serv : L'adresse du serveur
@@ -35,31 +34,32 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
             $ssl = "/ssl";
         }
 
-        /* Récupération des mails */
-        $hostname = '{' . $serveur . ':' . $port . '/imap' . $ssl . '}' . $folder;
+        $hostname = '{' . $serveur . ':' . $port . '/imap' . $ssl . '}';
 
-        $inbox = imap_open($hostname, $username, $password) or die('Problème de connexion : ' . imap_last_error());
+        $inbox = imap_open($hostname . $folder, $username, $password) or die('Problème de connexion : ' . imap_last_error());
 
+        require_once("fonctions.php");
+        ?>
+        <article>
+            <?php
+            recuperation_dossiers($inbox, $hostname);
+            ?>
+        </article>
+        <?php
         if ($inbox) {
             $emails = imap_search($inbox, 'ALL');
 
-            /* if emails are returned, cycle through each... */
             if ($emails) {
-
-                /* begin output var */
-                $sortie = '';
-
-                /* put the newest emails on top */
+                /* Inverse l'ordre pour afficher les emails les plus récents en premier */
                 rsort($emails);
-
-                /* for every email... */
+                $sortie = '';
                 foreach ($emails as $nombre_emails) {
 
-                    /* get information specific to this email */
+                    /* Informations sur l'email */
                     $apercu = imap_fetch_overview($inbox, $nombre_emails, 0);
                     $message = imap_fetchbody($inbox, $nombre_emails, 2);
 
-                    /* output the email header information */
+                    /* Affichage de l'entete de l'email */
                     $sortie.= '<article>';
                     $sortie.= '<div class="header-' . ($apercu[0]->seen ? 'lu' : 'non-lu') . '">';
                     $sortie.= '<span class="sujet">Sujet : <strong>' . $apercu[0]->subject . '</strong></span> ';
@@ -67,7 +67,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                     $sortie.= '<span class="date">Date : <em>' . $apercu[0]->date . '</em></span>';
                     $sortie.= '</div>';
 
-                    /* output the email body */
+                    /* Affichage du corps de l'email */
                     $sortie.= '<div class="body">' . $message . '</div>';
                     $sortie.= '</article>';
                 }
@@ -75,7 +75,6 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 echo $sortie;
             }
         }
-        /* close the connection */
         imap_close($inbox);
     }
 }
