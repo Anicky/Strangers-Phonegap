@@ -1,17 +1,18 @@
 <?php
 
-function recuperation_dossiers($inbox, $hostname) {
-    $liste_dossiers = imap_getmailboxes($inbox, $hostname, "*");
-    if (is_array($liste_dossiers)) {
-        foreach ($liste_dossiers as $dossier) {
-            echo $dossier->name . ", ";
-            echo substr($dossier->name, strlen($hostname)) . ", ";
-            echo "'" . $dossier->delimiter . "', ";
-            echo $dossier->attributes . "<br />\n";
-        }
-    } else {
-        echo "imap_getmailboxes a échoué : " . imap_last_error() . "\n";
-    }
+function get_hostname($server, $port, $ssl = "", $folder = "") {
+    return '{' . $server . ':' . $port . '/imap' . $ssl . '}' . $folder;
 }
 
+function get_dossiers($hostname, $username, $password) {
+    $retour = false;
+    $inbox = imap_open($hostname, $username, $password);
+    if ($inbox) {
+        $liste_dossiers = imap_getmailboxes($inbox, $hostname, "*");
+        if (is_array($liste_dossiers)) {
+            $retour = $liste_dossiers;
+        }
+    }
+    return $retour;
+}
 ?>

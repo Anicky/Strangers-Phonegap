@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Paramètres (obligatoires) :
  * serv : L'adresse du serveur
@@ -7,7 +8,7 @@
  * pass : Le mot de passe
  * Paramètres (facultatifs) :
  * num : Le numéro de téléphone à chercher
- * folder : Le dossier où chercher les mails (par défaut : INBOX (boite de réception))
+ * folders : Les dossier où chercher les mails (par défaut : INBOX (boite de réception))
  * ssl : Sécurité de la connexion : aucune ou SSL/TLS (par défaut : aucune)
  * nb : Nombre de mails à récupérer (du + récent au + ancien)
  * 
@@ -15,24 +16,24 @@
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
     if (($_POST['serv'] != "") && ($_POST['port'] != "") && ($_POST['user'] != "") && ($_POST['pass'] != "")) {
 
-        $serveur = $_POST['serv'];
-        $port = $_POST['port'];
-        $username = $_POST['user'];
-        $password = $_POST['pass'];
+        $serveur = htmlspecialchars($_POST['serv']);
+        $port = htmlspecialchars($_POST['port']);
+        $username = htmlspecialchars($_POST['user']);
+        $password = htmlspecialchars($_POST['pass']);
 
-        $folder = "INBOX";
-        if (isset($_POST['folder'])) {
-            $folder = $_POST['folder'];
+        $folders = array("INBOX");
+        if (isset($_POST['folders'])) {
+            $folders = $_POST['folders'];
         }
 
         $numero = "";
         if (isset($_POST['num'])) {
-            $numero = $_POST['num'];
+            $numero = htmlspecialchars($_POST['num']);
         }
 
         $nombre_emails = 0;
         if (isset($_POST['nb'])) {
-            $nombre_emails = $_POST['nb'];
+            $nombre_emails = htmlspecialchars($_POST['nb']);
         }
         if ($nombre_emails < 0) {
             $nombre_emails = 0;
@@ -43,18 +44,11 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
             $ssl = "/ssl";
         }
 
-        $hostname = '{' . $serveur . ':' . $port . '/imap' . $ssl . '}';
-
-        $inbox = imap_open($hostname . $folder, $username, $password) or die('Problème de connexion : ' . imap_last_error());
-
         require_once("fonctions.php");
-        ?>
-        <article>
-            <?php
-            recuperation_dossiers($inbox, $hostname);
-            ?>
-        </article>
-        <?php
+        $hostname = get_hostname($serveur, $port, $ssl);
+
+        $inbox = imap_open($hostname . "INBOX", $username, $password) or die('Problème de connexion : ' . imap_last_error());
+
         if ($inbox) {
             $emails = imap_search($inbox, 'ALL');
 
