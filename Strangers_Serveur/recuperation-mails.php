@@ -1,53 +1,80 @@
 <?php
+/**
+ * Paramètres (obligatoires) :
+ * serv : L'adresse du serveur
+ * port : Le port
+ * user : Le nom d'utilisateur
+ * pass : Le mot de passe
+ * Paramètres (facultatifs) :
+ * num : Le numéro de téléphone à chercher
+ * folder : Le dossier où chercher les mails (par défaut : INBOX (boite de réception))
+ * ssl : Sécurité de la connexion : aucune ou SSL/TLS (par défaut : aucune)
+ * 
+ */
+if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
+    if (($_POST['serv'] != "") && ($_POST['port'] != "") && ($_POST['user'] != "") && ($_POST['pass'] != "")) {
 
-if ((isset($_POST['num'])) && (isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
-    if (($_POST['num'] != "") && ($_POST['serv'] != "") && ($_POST['port'] != "") && ($_POST['user'] != "") && ($_POST['pass'] != "")) {
-
-        $numero = $_POST['num'];
         $serveur = $_POST['serv'];
         $port = $_POST['port'];
         $username = $_POST['user'];
         $password = $_POST['pass'];
-        $folder = $_POST['folder'];
 
-        /* Récupération des mails */
-        $hostname = '{' . $serveur . ':' . $port . '/imap/ssl}' . $folder;
-
-        $inbox = imap_open($hostname, $username, $password) or die('Problème de connexion : ' . imap_last_error());
-
-        $emails = imap_search($inbox, 'ALL');
-
-        /* if emails are returned, cycle through each... */
-        if ($emails) {
-
-            /* begin output var */
-            $output = '';
-
-            /* put the newest emails on top */
-            rsort($emails);
-
-            /* for every email... */
-            foreach ($emails as $email_number) {
-
-                /* get information specific to this email */
-                $overview = imap_fetch_overview($inbox, $email_number, 0);
-                $message = imap_fetchbody($inbox, $email_number, 2);
-
-                /* output the email header information */
-                $output.= '<div class="toggler ' . ($overview[0]->seen ? 'read' : 'unread') . '">';
-                $output.= '<span class="subject">' . $overview[0]->subject . '</span> ';
-                $output.= '<span class="from">' . $overview[0]->from . '</span>';
-                $output.= '<span class="date">on ' . $overview[0]->date . '</span>';
-                $output.= '</div>';
-
-                /* output the email body */
-                $output.= '<div class="body">' . $message . '</div>';
-            }
-
-            echo $output;
+        $folder = "INBOX";
+        if (isset($_POST['folder'])) {
+            $folder = $_POST['folder'];
         }
 
-        /* close the connection */
+        $numero = "";
+        if (isset($_POST['num'])) {
+            $numero = $_POST['num'];
+        }
+
+        $ssl = "";
+        if (isset($_POST['ssl'])) {
+            $ssl = "/ssl";
+        }
+
+        $hostname = '{' . $serveur . ':' . $port . '/imap' . $ssl . '}';
+
+        $inbox = imap_open($hostname . $folder, $username, $password) or die('Problème de connexion : ' . imap_last_error());
+
+        require_once("fonctions.php");
+        ?>
+        <article>
+            <?php
+            recuperation_dossiers($inbox, $hostname);
+            ?>
+        </article>
+        <?php
+        if ($inbox) {
+            $emails = imap_search($inbox, 'ALL');
+
+            if ($emails) {
+                /* Inverse l'ordre pour afficher les emails les plus récents en premier */
+                rsort($emails);
+                $sortie = '';
+                foreach ($emails as $nombre_emails) {
+
+                    /* Informations sur l'email */
+                    $apercu = imap_fetch_overview($inbox, $nombre_emails, 0);
+                    $message = imap_fetchbody($inbox, $nombre_emails, 2);
+
+                    /* Affichage de l'entete de l'email */
+                    $sortie.= '<article>';
+                    $sortie.= '<div class="header-' . ($apercu[0]->seen ? 'lu' : 'non-lu') . '">';
+                    $sortie.= '<span class="sujet">Sujet : <strong>' . $apercu[0]->subject . '</strong></span> ';
+                    $sortie.= '<span class="expediteur">Expéditeur : ' . $apercu[0]->from . '</span>';
+                    $sortie.= '<span class="date">Date : <em>' . $apercu[0]->date . '</em></span>';
+                    $sortie.= '</div>';
+
+                    /* Affichage du corps de l'email */
+                    $sortie.= '<div class="body">' . $message . '</div>';
+                    $sortie.= '</article>';
+                }
+
+                echo $sortie;
+            }
+        }
         imap_close($inbox);
     }
 }
