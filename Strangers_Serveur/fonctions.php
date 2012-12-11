@@ -10,7 +10,7 @@ function recuperation_dossiers($inbox, $hostname) {
             echo $dossier->attributes . "<br />\n";
         }
     } else {
-        echo "imap_getmailboxes a Ã©chouÃ© : " . imap_last_error() . "\n";
+        echo "imap_getmailboxes a échoué : " . imap_last_error() . "\n";
     }
 }
 

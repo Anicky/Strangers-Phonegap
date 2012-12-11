@@ -1,14 +1,14 @@
 <?php
 /**
- * ParamÃ¨tres (obligatoires) :
+ * Paramètres (obligatoires) :
  * serv : L'adresse du serveur
  * port : Le port
  * user : Le nom d'utilisateur
  * pass : Le mot de passe
- * ParamÃ¨tres (facultatifs) :
- * num : Le numÃ©ro de tÃ©lÃ©phone Ã  chercher
- * folder : Le dossier oÃ¹ chercher les mails (par dÃ©faut : INBOX (boite de rÃ©ception))
- * ssl : SÃ©curitÃ© de la connexion : aucune ou SSL/TLS (par dÃ©faut : aucune)
+ * Paramètres (facultatifs) :
+ * num : Le numéro de téléphone à chercher
+ * folder : Le dossier où chercher les mails (par défaut : INBOX (boite de réception))
+ * ssl : Sécurité de la connexion : aucune ou SSL/TLS (par défaut : aucune)
  * 
  */
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
@@ -36,7 +36,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
         $hostname = '{' . $serveur . ':' . $port . '/imap' . $ssl . '}';
 
-        $inbox = imap_open($hostname . $folder, $username, $password) or die('ProblÃ¨me de connexion : ' . imap_last_error());
+        $inbox = imap_open($hostname . $folder, $username, $password) or die('Problème de connexion : ' . imap_last_error());
 
         require_once("fonctions.php");
         ?>
@@ -50,7 +50,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
             $emails = imap_search($inbox, 'ALL');
 
             if ($emails) {
-                /* Inverse l'ordre pour afficher les emails les plus rÃ©cents en premier */
+                /* Inverse l'ordre pour afficher les emails les plus récents en premier */
                 rsort($emails);
                 $sortie = '';
                 foreach ($emails as $nombre_emails) {
@@ -63,7 +63,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                     $sortie.= '<article>';
                     $sortie.= '<div class="header-' . ($apercu[0]->seen ? 'lu' : 'non-lu') . '">';
                     $sortie.= '<span class="sujet">Sujet : <strong>' . $apercu[0]->subject . '</strong></span> ';
-                    $sortie.= '<span class="expediteur">ExpÃ©diteur : ' . $apercu[0]->from . '</span>';
+                    $sortie.= '<span class="expediteur">Expéditeur : ' . $apercu[0]->from . '</span>';
                     $sortie.= '<span class="date">Date : <em>' . $apercu[0]->date . '</em></span>';
                     $sortie.= '</div>';
 
