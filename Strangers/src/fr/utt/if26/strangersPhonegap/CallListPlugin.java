@@ -59,7 +59,7 @@ public class CallListPlugin extends Plugin {
                         limit = -30;
                     } else if (d.equals("all")) {
                         limit = -1000000;
-                    } // LOL
+                    }
                 }
 
                 //turn this into a date
@@ -127,7 +127,8 @@ public class CallListPlugin extends Plugin {
             android.provider.CallLog.Calls.CACHED_NUMBER_LABEL};
 
         try {
-            Cursor callLogCursor = ctx.getContentResolver().query(
+            Cursor callLogCursor;
+            callLogCursor = cordova.getActivity().getContentResolver().query(
                     android.provider.CallLog.Calls.CONTENT_URI,
                     strFields,
                     CallLog.Calls.DATE + ">?",
@@ -188,7 +189,8 @@ public class CallListPlugin extends Plugin {
         Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
 
         // query time
-        Cursor c = ctx.getContentResolver().query(contactUri, projection, null, null, null);
+        Cursor c;
+        c = cordova.getActivity().getContentResolver().query(contactUri, projection, null, null, null);
 
         // if the query returns 1 or more results
         // return the first result
