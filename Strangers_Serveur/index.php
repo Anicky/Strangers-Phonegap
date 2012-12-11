@@ -51,6 +51,14 @@
             </td>
         </tr>
         <tr>
+            <td class="label">
+                <label for="folder">Nombre d'emails à récupérer<br />(A partir du + récent / Mettre 0 pour "tous")</label>
+            </td>
+            <td>
+                <input type="text" name="nb" id="nb" value="0" />
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <input type="checkbox" name="ssl" id="ssl" value="1" />
                 <label for="ssl" class="checkbox">SSL</label>

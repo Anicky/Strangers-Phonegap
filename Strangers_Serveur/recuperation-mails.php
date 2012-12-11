@@ -9,6 +9,7 @@
  * num : Le numéro de téléphone à chercher
  * folder : Le dossier où chercher les mails (par défaut : INBOX (boite de réception))
  * ssl : Sécurité de la connexion : aucune ou SSL/TLS (par défaut : aucune)
+ * nb : Nombre de mails à récupérer (du + récent au + ancien)
  * 
  */
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
@@ -27,6 +28,11 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
         $numero = "";
         if (isset($_POST['num'])) {
             $numero = $_POST['num'];
+        }
+
+        $nombre_emails = 0;
+        if (isset($_POST['nb'])) {
+            $nombre_emails = $_POST['nb'];
         }
 
         $ssl = "";
@@ -53,7 +59,14 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 /* Inverse l'ordre pour afficher les emails les plus récents en premier */
                 rsort($emails);
                 $sortie = '';
-                foreach ($emails as $numero_email) {
+
+                if ($nombre_emails == 0) {
+                    $nombre_emails = count($emails);
+                }
+
+                for ($i = 0; $i < $nombre_emails; $i++) {
+
+                    $numero_email = $emails[$i];
 
                     /* Informations sur l'email */
                     $apercu = imap_fetch_overview($inbox, $numero_email, 0);
