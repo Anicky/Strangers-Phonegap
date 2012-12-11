@@ -36,6 +36,8 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
         $hostname = '{' . $serveur . ':' . $port . '/imap' . $ssl . '}';
 
+        set_time_limit(60);
+        
         $inbox = imap_open($hostname . $folder, $username, $password) or die('Problème de connexion : ' . imap_last_error());
 
         require_once("fonctions.php");
