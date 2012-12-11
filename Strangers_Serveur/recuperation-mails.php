@@ -34,6 +34,9 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
         if (isset($_POST['nb'])) {
             $nombre_emails = $_POST['nb'];
         }
+        if ($nombre_emails < 0) {
+            $nombre_emails = 0;
+        }
 
         $ssl = "";
         if (isset($_POST['ssl'])) {
