@@ -4,7 +4,7 @@
     <table class="formulaire">
         <tr>
             <td class="label">
-                <label for="num">Numéro de téléphone</label>
+                <label for="num">NumÃ©ro de tÃ©lÃ©phone</label>
             </td>
             <td>
                 <input type="text" name="num" id="num" />

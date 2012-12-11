@@ -1,14 +1,14 @@
 <?php
 /**
- * Paramètres (obligatoires) :
+ * ParamÃ¨tres (obligatoires) :
  * serv : L'adresse du serveur
  * port : Le port
  * user : Le nom d'utilisateur
  * pass : Le mot de passe
- * Paramètres (facultatifs) :
- * num : Le numéro de téléphone à chercher
- * folder : Le dossier où chercher les mails (par défaut : INBOX (boite de réception))
- * ssl : Sécurité de la connexion : aucune ou SSL/TLS (par défaut : aucune)
+ * ParamÃ¨tres (facultatifs) :
+ * num : Le numÃ©ro de tÃ©lÃ©phone Ã  chercher
+ * folder : Le dossier oÃ¹ chercher les mails (par dÃ©faut : INBOX (boite de rÃ©ception))
+ * ssl : SÃ©curitÃ© de la connexion : aucune ou SSL/TLS (par dÃ©faut : aucune)
  * 
  */
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
@@ -36,9 +36,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
         $hostname = '{' . $serveur . ':' . $port . '/imap' . $ssl . '}';
 
-        set_time_limit(60);
-        
-        $inbox = imap_open($hostname . $folder, $username, $password) or die('Problème de connexion : ' . imap_last_error());
+        $inbox = imap_open($hostname . $folder, $username, $password) or die('ProblÃ¨me de connexion : ' . imap_last_error());
 
         require_once("fonctions.php");
         ?>
@@ -52,20 +50,20 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
             $emails = imap_search($inbox, 'ALL');
 
             if ($emails) {
-                /* Inverse l'ordre pour afficher les emails les plus récents en premier */
+                /* Inverse l'ordre pour afficher les emails les plus rÃ©cents en premier */
                 rsort($emails);
                 $sortie = '';
-                foreach ($emails as $nombre_emails) {
+                foreach ($emails as $numero_email) {
 
                     /* Informations sur l'email */
-                    $apercu = imap_fetch_overview($inbox, $nombre_emails, 0);
-                    $message = imap_fetchbody($inbox, $nombre_emails, 2);
+                    $apercu = imap_fetch_overview($inbox, $numero_email, 0);
+                    $message = imap_fetchbody($inbox, $numero_email, 2, FT_PEEK);
 
                     /* Affichage de l'entete de l'email */
                     $sortie.= '<article>';
                     $sortie.= '<div class="header-' . ($apercu[0]->seen ? 'lu' : 'non-lu') . '">';
                     $sortie.= '<span class="sujet">Sujet : <strong>' . $apercu[0]->subject . '</strong></span> ';
-                    $sortie.= '<span class="expediteur">Expéditeur : ' . $apercu[0]->from . '</span>';
+                    $sortie.= '<span class="expediteur">ExpÃ©diteur : ' . $apercu[0]->from . '</span>';
                     $sortie.= '<span class="date">Date : <em>' . $apercu[0]->date . '</em></span>';
                     $sortie.= '</div>';
 
