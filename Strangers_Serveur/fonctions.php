@@ -23,5 +23,10 @@ function get_dossiers($hostname, $username, $password) {
     }
     return $retour;
 }
+// fonctions pour détecter des num de Tel valide
+//function get_num_valide($expression) {
+  //  $num_valide = ($expression) ;
 
+// return $num_valide;
+//}
 ?>
