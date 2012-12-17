@@ -67,7 +67,8 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
                     /* Informations sur l'email */
                     $apercu = imap_fetch_overview($inbox, $numero_email, 0);
-                    $message = imap_fetchbody($inbox, $numero_email, 2, FT_PEEK);
+                    $message = imap_fetchbody($inbox, $numero_email, 1, FT_PEEK);
+                                       
 
                     /* Affichage de l'entete de l'email */
                     $sortie.= '<article>';
@@ -83,6 +84,8 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 }
 
                 echo $sortie;
+               
+               
             }
         }
         imap_close($inbox);
