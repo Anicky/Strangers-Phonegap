@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Paramètres (obligatoires) :
  * serv : L'adresse du serveur
@@ -13,7 +12,7 @@
  * nb : Nombre de mails à récupérer (du + récent au + ancien)
  * 
  */
-if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass'])) && (isset($_POST['num'])) ) {
+if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass'])) && (isset($_POST['num']))) {
     if (($_POST['serv'] != "") && ($_POST['port'] != "") && ($_POST['user'] != "") && ($_POST['pass'] != "") && ($_POST['num'] != "")) {
 
         $serveur = htmlspecialchars($_POST['serv']);
@@ -56,10 +55,9 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 /* Inverse l'ordre pour afficher les emails les plus récents en premier */
                 rsort($emails);
                 $sortie = '';
-                $message_global = '';
-                
+
                 if ($nombre_emails == 0) {
-                     $nombre_emails = count($emails);
+                    $nombre_emails = count($emails);
                 }
 
                 for ($i = 0; $i < $nombre_emails; $i++) {
@@ -68,8 +66,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
                     /* Informations sur l'email */
                     $apercu = imap_fetch_overview($inbox, $numero_email, 0);
-                    $message= imap_fetchbody($inbox, $numero_email, 1, FT_PEEK);
-                    $message_global .= $message;                  
+                    $message = imap_fetchbody($inbox, $numero_email, 1, FT_PEEK);
 
                     /* Affichage de l'entete de l'email */
                     $sortie.= '<article>';
@@ -81,51 +78,43 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
                     /* Affichage du corps de l'email */
                     $sortie.= '<div class="body">' . $message . '</div>';
-                    
+
                     $sortie.= '</article>';
                 }
 
-               //echo $sortie;
-               //echo $message_global;
-            
-                echo "<br/>";
-                $tableau[]='';
-                $numero_a_verifier = $_POST['num'];
-                $longeur_chaine_a_verifier =strlen($_POST['num']);
-                $nombre_num_valide = preg_match_all("#0[1-9]([-./\\ ]?[0-9]{2}){4}#",$message_global, $tableau,PREG_PATTERN_ORDER);
-                echo $nombre_num_valide; echo "<br/>";
-                var_dump($tableau[0]);
-                //$longeur_chaine_extraite=$tableau[0][0];
-                echo $numero_a_verifier;echo "<br/>";
-                echo $longeur_chaine_a_verifier;echo "<br/>";
-               // echo $longeur_chaine_extraite;echo "<br/>";
-                
-                for($k=0;$k<$nombre_num_valide;$k++){
-                   // $liste_numero=$tableau[0][$k];
-                    $liste_numero=$tableau[0][0];
-                for($j=0,$i=0;$j<14,$i<$longeur_chaine_a_verifier;$j=$j+3,$i=$i+2){
-                   
-                    
-                    $chaine1 = substr($numero_a_verifier, $i, $i+2);
-                    $chaine2 = substr($liste_numero, $j,$j+2);
-                    
-                    
-                    if( strcmp($chaine1,$chaine2) == 0 ){
-                        echo "OK";
-                    } else echo "KO";
-                    
-                    echo "<br/>";              
-                    echo $chaine1; echo "<br/>";
-                    echo $chaine2; echo "<br/>";
-                    echo strcmp($chaine1,$chaine2);echo "<br/>";
-                    
-                    //$array_num = preg_grep("#0[1-9]([-./\\ ]?[0-9]{2}){4}#",);
-                    
-                    }}
+                // Séparation de la chaine de caractères en groupes de 2 numéros
+                $numero_parts = str_split($numero, 2);
+
+                // Création de l'expression régulière
+                $delimiter = "[-./\\ ]?";
+                $regexp = "#(";
+                foreach ($numero_parts as $part) {
+                    $regexp .= $part . $delimiter;
+                }
+                $regexp .= ")#";
+
+                // Chaine de remplacement (là on leur applique un style CSS pour les repérer facilement sur la page !)
+                $remplacement = '<span class="telephoneTrouve">${1}</span>';
+
+                // Remplacement des numéros de téléphone
+                $sortie = preg_replace($regexp, $remplacement, $sortie);
+
+                // Debug
+                ?>
+                <div class="debug">
+                    <h1>Debug</h1><br />
+                    <?php
+                    echo "Numéro : " . $numero . " (" . strlen($numero) . " caracteres)<br />";
+                    var_dump($numero_parts);
+                    echo "Expression régulière : " . $regexp;
+                    ?>
+                </div>
+                <?php
+                // Affichage des mails avec numéro de téléphone trouvé affiché en gras et rouge
+                echo $sortie;
             }
         }
         imap_close($inbox);
     }
-    
 }
 ?>
