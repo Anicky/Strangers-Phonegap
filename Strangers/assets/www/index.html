@@ -29,23 +29,31 @@
                 "list",
                 [""]);
             }
-            function test_set() {
+            function debug_set() {
                 cordova.exec(
                 function(retour) {
-                    alert(retour)
+                    alert(retour);
                 }, function(error) {
                     alert(error);
                 },
                 "StockageLocal",
                 "set",
-                ["martin.dupont@gmail.com", "martin.dupont", "pass", "imap.googlemail.com", 443, true]);
+                [
+                    {email:'martin.dupont@gmail.com', user:'martin.dupont', pass:'test1', server:'iamp.googlemail.com', port:93, ssl:true},
+                    {email:'jeanne.darc@free.fr', user:'ja', pass:'test2', server:'imap.free.fr', port:62, ssl:false}
+                ]);
             }
-            function test_get() {
+            function getAccounts() {
                 cordova.exec(
-                function(retour) {
-                    alert(retour)
+                function(listeComptes) {
+                    var html = "";
+                    for (i = 0; i < listeComptes.length; i++) {
+                        html += "<li><a href=\"#comptes-ajouter\" data-transition=\"slide\">" + listeComptes[i]['email'] + "</a></li>";
+                    }
+                    $("#listeComptes").html(html);
+                    $("#listeComptes").listview("refresh");
                 }, function(error) {
-                    alert(error);
+                    alert("Une erreur est survenue : impossible de récupérer les comptes emails.");
                 },
                 "StockageLocal",
                 "get",
@@ -60,14 +68,10 @@
         <!-- Page d'accueil -->
         <div data-role="page" id="accueil">
             <div data-role="header">
-                <h3>
-                    Strangers
-                </h3>
+                <h1>Strangers</h1>
+                <a href="#comptes-liste" data-transition="slide" data-icon="gear" class="ui-btn-right" onclick="getAccounts()">Options</a>
             </div>
             <div data-role="content">
-                <a data-role="button" data-transition="slide" href="#comptes-liste" data-icon="gear" data-iconpos="left">
-                    Configuration
-                </a>
                 <form action="ajout" method="POST">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
@@ -78,8 +82,6 @@
                     <a data-role="button" data-transition="slide" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">
                         Journal d'appels
                     </a>
-                    <a href="#" onclick="test_set()">TEST : set donneees</a><br />
-                    <a href="#" onclick="test_get()">TEST : get donneees</a>
                     <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
                 </form>
             </div>
@@ -87,9 +89,7 @@
         <!-- Liste des comptes -->
         <div data-role="page" id="comptes-liste">
             <div data-role="header">
-                <h3>
-                    Strangers
-                </h3>
+                <h1>Strangers</h1>
             </div>
             <div data-role="content">
                 <div data-role="navbar" data-iconpos="left">
@@ -109,29 +109,18 @@
                 <a data-role="button" data-transition="slide" href="#comptes-ajouter" data-icon="plus" data-iconpos="left">
                     Ajouter un compte email
                 </a>
+                <a href="#" onclick="debug_set()">DEBUT : set data</a><br />
                 <h2>
                     Liste des comptes
                 </h2>
-                <ul data-role="listview" data-inset="true">
-                    <li>
-                        <a href="#" data-transition="slide">
-                            martin.dupont@gmail.com
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-transition="slide">
-                            mdupont@free.fr
-                        </a>
-                    </li>
-                </ul>
+                <ul data-role="listview" data-inset="true" id="listeComptes"></ul>
             </div>
         </div>
         <!-- Ajouter un compte -->
         <div data-role="page" id="comptes-ajouter">
             <div data-role="header">
-                <h3>
-                    Strangers
-                </h3>
+                <a href="#comptes-liste" data-icon="delete">Annuler</a>
+                <h1>Strangers</h1>
             </div>
             <div data-role="content">
                 <h2>
@@ -185,9 +174,7 @@
         <!-- Options de recherche -->
         <div data-role="page" id="options-recherche">
             <div data-role="header">
-                <h3>
-                    Strangers
-                </h3>
+                <h1>Strangers</h1>
             </div>
             <div data-role="content">
                 <div data-role="navbar" data-iconpos="left">
@@ -210,9 +197,8 @@
         <!-- Journal d'appels -->
         <div data-role="page" id="journal-appels">
             <div data-role="header">
-                <h3>
-                    Strangers
-                </h3>
+                <h1>Strangers</h1>
+                <a href="#comptes-liste" data-transition="slide" data-icon="gear" class="ui-btn-right">Options</a>
             </div>
             <div data-role="content">
                 <h2>
