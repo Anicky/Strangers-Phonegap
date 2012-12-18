@@ -8,16 +8,29 @@
         <script src="js/cordova-2.2.0.js" charset="utf-8"></script>
         <script src="js/jquery.js" charset="utf-8"></script>
         <script src="js/jquery.mobile-1.2.0.js" charset="utf-8"></script>
-        <script src="js/callLog.js" charset="utf-8"></script>
         <script>
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
                 // Empty
             }
             function showCallList() {
-                window.calllog("test", function(echoValue) {
-                    $("#appels").append(echoValue);
-                });
+                cordova.exec(
+                function(listeAppels) {
+                    var html = "";
+                    for (i = 0; i < listeAppels.length; i++) {
+                        html += "<li><a href=\"#accueil\" data-transition=\"slide\" onclick=\"addNumber(" + listeAppels[i] + ")\">" + listeAppels[i] + "</a></li>";
+                    }
+                    $("#listeAppels").html(html);
+                    $("#listeAppels").listview("refresh");
+                }, function() {
+                    alert("Une erreur est survenue : le journal d'appels est indisponible.");
+                },
+                "JournalAppels",
+                "list",
+                [""]);
+            }
+            function addNumber(numero) {
+                $("#accueil_telephone").val(numero);
             }
         </script>
     </head>
@@ -40,7 +53,7 @@
                             <input name="telephone" id="accueil_telephone" type="tel" />
                         </fieldset>
                     </div>
-                    <a data-role="button" data-transition="slide" href="#journal-appels" data-icon="info" data-iconpos="left">
+                    <a data-role="button" data-transition="slide" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">
                         Journal d'appels
                     </a>
                     <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
@@ -177,33 +190,11 @@
                     Strangers
                 </h3>
             </div>
-            <div data-role="content" id="appels">
-                <p><a href="#" onclick="showCallList(); return false;">Show Alert</a></p>
+            <div data-role="content">
                 <h2>
                     Journal d'appels
                 </h2>
-                <ul data-role="listview" data-inset="true">
-                    <li>
-                        <a href="#accueil" data-transition="slide">
-                            06 69 87 43 19
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#accueil" data-transition="slide">
-                            09 76 54 32 90
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#accueil" data-transition="slide">
-                            08 76 43 29 00
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#accueil" data-transition="slide">
-                            06 25 45 72 98
-                        </a>
-                    </li>
-                </ul>
+                <ul data-role="listview" data-inset="true" id="listeAppels"></ul>
             </div>
         </div>
     </body>

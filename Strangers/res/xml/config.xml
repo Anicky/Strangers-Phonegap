@@ -51,7 +51,9 @@
         <plugin name="Battery" value="org.apache.cordova.BatteryListener"/>
         <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
         <plugin name="Echo" value="org.apache.cordova.Echo" />
-        <plugin name="JeremieTest" value="fr.utt.if26.strangersPhonegap.JeremieTest" />
+
+        <plugin name="JournalAppels" value="fr.utt.if26.strangersPhonegap.JournalAppels" />
+        <plugin name="StockageLocal" value="fr.utt.if26.strangersPhonegap.StockageLocal" />
     </plugins>
 </cordova>
 

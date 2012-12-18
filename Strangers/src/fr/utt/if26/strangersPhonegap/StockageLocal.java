@@ -1,36 +1,28 @@
 package fr.utt.if26.strangersPhonegap;
 
 import android.util.Log;
-import org.apache.cordova.api.Plugin;
-import org.apache.cordova.api.PluginResult;
+import org.apache.cordova.api.CallbackContext;
+import org.apache.cordova.api.CordovaPlugin;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Plugin Android pour stocker des données en local
  *
  * @author JALOUZET Jérémie / OUADGHIRI Mohammed
  */
-public class StockageLocal extends Plugin {
+public class StockageLocal extends CordovaPlugin {
 
-    public static final String NATIVE_ACTION_STRING = "nativeAction";
-    public static final String SUCCESS_PARAMETER = "success";
+    private final String TAG = "Plugin : StockageLocal";
 
     @Override
-    public PluginResult execute(String action, JSONArray data, String callbackId) {
-        Log.d("HelloPlugin", "Hello, this is a native function called from PhoneGap/Cordova!"); //only perform the action if it is the one that should be invoked  
-        if (NATIVE_ACTION_STRING.equals(action)) {
-            String resultType = null;
-            try {
-                resultType = data.getString(0);
-            } catch (Exception ex) {
-                Log.d("HelloPlugin", ex.toString());
-            }
-            if (resultType.equals(SUCCESS_PARAMETER)) {
-                return new PluginResult(PluginResult.Status.OK, "Yay, Success!!!");
-            } else {
-                return new PluginResult(PluginResult.Status.ERROR, "Oops, Error :(");
-            }
-        }
-        return null;
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        Log.d(TAG, "Plugin start");
+        boolean resultat = true;
+
+        // @todo
+        
+        Log.d(TAG, "Plugin stop");
+        return resultat;
     }
 }
