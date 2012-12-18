@@ -5,39 +5,206 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Strangers (version Phonegap)</title>
         <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
-        <script src="js/jquery.js"></script>
-        <script src="js/jquery.mobile-1.2.0.js"></script>
+        <script src="js/cordova-2.2.0.js" charset="utf-8"></script>
+        <script src="js/jquery.js" charset="utf-8"></script>
+        <script src="js/jquery.mobile-1.2.0.js" charset="utf-8"></script>
+        <script src="js/callLog.js" charset="utf-8"></script>
+        <script>
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                // Empty
+            }
+            function showCallList() {
+                window.calllog("test", function(echoValue) {
+                    $("#appels").append(echoValue);
+                });
+            }
+        </script>
     </head>
     <body>
         <!-- Page d'accueil -->
-        <div data-role="page" id="page1">
-            <div data-theme="" data-role="header">
+        <div data-role="page" id="accueil">
+            <div data-role="header">
                 <h3>
                     Strangers
                 </h3>
             </div>
             <div data-role="content">
-                <a data-role="button" data-transition="slide" href="comptes-liste.html" data-icon="gear" data-iconpos="left">
+                <a data-role="button" data-transition="slide" href="#comptes-liste" data-icon="gear" data-iconpos="left">
                     Configuration
                 </a>
                 <form action="ajout" method="POST">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <label for="textinput1">Numéro de téléphone</label>
-                            <input name="telephone" id="textinput1" placeholder="" value="" type="tel" />
+                            <label for="accueil_telephone">Numéro de téléphone</label>
+                            <input name="telephone" id="accueil_telephone" type="tel" />
                         </fieldset>
                     </div>
-                    <a data-role="button" data-transition="slide" href="journal-appels.html" data-icon="info" data-iconpos="left">
+                    <a data-role="button" data-transition="slide" href="#journal-appels" data-icon="info" data-iconpos="left">
                         Journal d'appels
                     </a>
                     <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
                 </form>
             </div>
         </div>
-        <script type="text/javascript" src="js/cordova-2.2.0.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+        <!-- Liste des comptes -->
+        <div data-role="page" id="comptes-liste">
+            <div data-role="header">
+                <h3>
+                    Strangers
+                </h3>
+            </div>
+            <div data-role="content">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li>
+                            <a href="#comptes-liste" class="ui-btn-active ui-state-persist">
+                                Comptes email
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#options-recherche">
+                                Recherche
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a data-role="button" data-transition="slide" href="#comptes-ajouter" data-icon="plus" data-iconpos="left">
+                    Ajouter un compte email
+                </a>
+                <h2>
+                    Liste des comptes
+                </h2>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <a href="#" data-transition="slide">
+                            martin.dupont@gmail.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-transition="slide">
+                            mdupont@free.fr
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Ajouter un compte -->
+        <div data-role="page" id="comptes-ajouter">
+            <div data-role="header">
+                <h3>
+                    Strangers
+                </h3>
+            </div>
+            <div data-role="content">
+                <h2>
+                    Ajouter un compte
+                </h2>
+                <form action="ajout" method="POST">
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="compte_email">
+                                Adresse email
+                            </label>
+                            <input name="email" id="compte_email" placeholder="martin.dupont@gmail.com" type="email" />
+                        </fieldset>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="compte_user">
+                                Nom d'utilisateur
+                            </label>
+                            <input name="user" id="compte_user" type="text" />
+                        </fieldset>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="compte_pass">
+                                Mot de passe
+                            </label>
+                            <input name="password" id="compte_pass" type="password" />
+                        </fieldset>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="compte_server">
+                                Nom du serveur
+                            </label>
+                            <input name="server" id="compte_server" placeholder="imap.googlemail.com" type="text" />
+                        </fieldset>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="compte_port">
+                                Port
+                            </label>
+                            <input name="port" id="compte_port" placeholder="993" type="number" />
+                        </fieldset>
+                    </div>
+                    <input data-icon="check" data-iconpos="left" value="Tester la connexion" type="submit" />
+                </form>
+            </div>
+        </div>
+        <!-- Options de recherche -->
+        <div data-role="page" id="options-recherche">
+            <div data-role="header">
+                <h3>
+                    Strangers
+                </h3>
+            </div>
+            <div data-role="content">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li>
+                            <a href="#comptes-liste">
+                                Comptes email
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#options-recherche" class="ui-btn-active ui-state-persist">
+                                Recherche
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- // @todo -->
+            </div>
+        </div>
+        <!-- Journal d'appels -->
+        <div data-role="page" id="journal-appels">
+            <div data-role="header">
+                <h3>
+                    Strangers
+                </h3>
+            </div>
+            <div data-role="content" id="appels">
+                <p><a href="#" onclick="showCallList(); return false;">Show Alert</a></p>
+                <h2>
+                    Journal d'appels
+                </h2>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <a href="#accueil" data-transition="slide">
+                            06 69 87 43 19
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#accueil" data-transition="slide">
+                            09 76 54 32 90
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#accueil" data-transition="slide">
+                            08 76 43 29 00
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#accueil" data-transition="slide">
+                            06 25 45 72 98
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </body>
 </html>

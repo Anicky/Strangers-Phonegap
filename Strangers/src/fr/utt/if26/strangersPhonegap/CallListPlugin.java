@@ -1,9 +1,8 @@
+/**
+ * Example of Android PhoneGap Plugin
+ */
 package fr.utt.if26.strangersPhonegap;
 
-/**
- *
- * @author JALOUZET Jérémie
- */
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -22,8 +21,8 @@ import org.json.JSONObject;
 
 /**
  * Grab call log data
- *
- * @author James Hornitzky
+ * 
+* @author James Hornitzky
  */
 public class CallListPlugin extends Plugin {
 
@@ -37,7 +36,7 @@ public class CallListPlugin extends Plugin {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.phonegap.api.Plugin#execute(java.lang.String,
      * org.json.JSONArray, java.lang.String)
      */
@@ -49,7 +48,7 @@ public class CallListPlugin extends Plugin {
             try {
                 int limit = -1;
 
-                //obtain date to limit by
+//obtain date to limit by
                 if (!data.isNull(0)) {
                     String d = data.getString(0);
                     Log.d(TAG, "Time period is: " + d);
@@ -58,18 +57,18 @@ public class CallListPlugin extends Plugin {
                     } else if (d.equals("month")) {
                         limit = -30;
                     } else if (d.equals("all")) {
-                        limit = -1000000;
+                        limit = -1000000; // LOL
                     }
                 }
 
-                //turn this into a date
+//turn this into a date
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(new Date());
                 calendar.add(Calendar.DAY_OF_YEAR, limit);
                 Date limitDate = calendar.getTime();
                 String limiter = String.valueOf(limitDate.getTime());
 
-                //now do required search
+//now do required search
                 JSONObject callInfo = getCallListing(limiter);
                 Log.d(TAG, "Returning " + callInfo.toString());
                 result = new PluginResult(Status.OK, callInfo);
@@ -105,8 +104,8 @@ public class CallListPlugin extends Plugin {
 
     /**
      * Gets the Directory listing for file, in JSON format
-     *
-     * @param file The file for which we want to do directory listing
+     *     
+* @param file The file for which we want to do directory listing
      * @return JSONObject representation of directory list. e.g
      * {"filename":"/sdcard" ,"isdir":true,"children":[{"filename":"a.txt"
      * ,"isdir":false},{...}]}
@@ -127,8 +126,7 @@ public class CallListPlugin extends Plugin {
             android.provider.CallLog.Calls.CACHED_NUMBER_LABEL};
 
         try {
-            Cursor callLogCursor;
-            callLogCursor = cordova.getActivity().getContentResolver().query(
+            Cursor callLogCursor = cordova.getActivity().getContentResolver().query(
                     android.provider.CallLog.Calls.CONTENT_URI,
                     strFields,
                     CallLog.Calls.DATE + ">?",
@@ -150,7 +148,7 @@ public class CallListPlugin extends Plugin {
                     callLogItem.put("new", callLogCursor.getInt(4));
                     callLogItem.put("cachedName", callLogCursor.getString(5));
                     callLogItem.put("cachedNumberType", callLogCursor.getInt(6));
-                    //callLogItem.put("name", getContactNameFromNumber(callLogCursor.getString(1))); //grab name too
+//callLogItem.put("name", getContactNameFromNumber(callLogCursor.getString(1))); //grab name too
                     callLogItems.put(callLogItem);
                     callLogItem = new JSONObject();
                 } while (callLogCursor.moveToNext());
@@ -179,28 +177,27 @@ public class CallListPlugin extends Plugin {
 
     /**
      * Util method to grab name based on number
-     *
-     */
+     *     
+*/
     private String getContactNameFromNumber(String number) {
-        // define the columns I want the query to return
+// define the columns I want the query to return
         String[] projection = new String[]{Contacts.Phones.DISPLAY_NAME, Contacts.Phones.NUMBER};
 
-        // encode the phone number and build the filter URI
+// encode the phone number and build the filter URI
         Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
 
-        // query time
-        Cursor c;
-        c = cordova.getActivity().getContentResolver().query(contactUri, projection, null, null, null);
+// query time
+        Cursor c = cordova.getActivity().getContentResolver().query(contactUri, projection, null, null, null);
 
-        // if the query returns 1 or more results
-        // return the first result
+// if the query returns 1 or more results
+// return the first result
         if (c.moveToFirst()) {
             String name = c.getString(c.getColumnIndex(Contacts.Phones.DISPLAY_NAME));
             c.deactivate();
             return name;
         }
 
-        // return the original number if no match was found
+// return the original number if no match was found
         return number;
     }
 }
