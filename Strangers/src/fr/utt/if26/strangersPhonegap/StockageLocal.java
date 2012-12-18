@@ -1,7 +1,14 @@
 package fr.utt.if26.strangersPhonegap;
 
+import android.content.Context;
 import android.util.Log;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -23,6 +30,7 @@ public class StockageLocal extends CordovaPlugin {
     private final String ACTION_GET = "get";
     private final String ACTION_SET = "set";
     private final String TAG = "Plugin : StockageLocal";
+    private final String SETTINGS_FILE = "settings.dat";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -31,38 +39,74 @@ public class StockageLocal extends CordovaPlugin {
 
         if (action.equals(ACTION_GET)) {
             Log.d(TAG, "Action : Get");
-            // @todo
-
             try {
-                byte[] donnees = "account1.port=23\naccount2.port=64".getBytes();
-
-                // crypter
-                byte[] donneesCryptees = crypter(Strangers.getKey(), donnees);
-
-                // decrypter
-                byte[] donneesDecryptees = decrypter(Strangers.getKey(), donneesCryptees);
-                Log.d(TAG, new String(donneesDecryptees));
+                String donnees = read();
+                Log.d(TAG, donnees);
+                callbackContext.success(donnees);
             } catch (Exception ex) {
                 Log.e(TAG, ex.getLocalizedMessage());
             }
-
         } else if (action.equals(ACTION_SET)) {
             Log.d(TAG, "Action : Set");
-            // @todo
+            String email = args.getString(0);
+            String user = args.getString(1);
+            String pass = args.getString(2);
+            String server = args.getString(3);
+            int port = args.getInt(4);
+            boolean ssl = args.getBoolean(5);
+            String donnees = "account1.email=" + email + "\n"
+                    + "account1.user=" + user + "\n";
+            write(donnees);
         }
         Log.d(TAG, "Plugin stop");
         return resultat;
     }
 
-    private byte[] crypter(byte[] raw, byte[] clear) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(raw, "AES"));
-        return cipher.doFinal(clear);
+    private void write(String donnees) {
+        FileOutputStream fichier = null;
+        OutputStreamWriter sortie = null;
+
+        try {
+            fichier = cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_APPEND);
+            sortie = new OutputStreamWriter(fichier);
+            sortie.write(crypter(donnees));
+            sortie.flush();
+            Log.d(TAG, "Donnees sauvegardees");
+        } catch (Exception e) {
+            Log.e(TAG, e.getLocalizedMessage());
+        } finally {
+            try {
+                sortie.close();
+                fichier.close();
+            } catch (IOException e) {
+                Log.e(TAG, e.getLocalizedMessage());
+            }
+        }
     }
 
-    private byte[] decrypter(byte[] raw, byte[] encrypted) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    private String read() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
+        char[] buffer = new char[255];
+        String donnees = null;
+        try {
+            InputStreamReader entree = new InputStreamReader(cordova.getContext().openFileInput(SETTINGS_FILE));
+            entree.read(buffer);
+            donnees = new String(buffer);
+            Log.d(TAG, decrypter(donnees));
+        } catch (Exception e) {
+            Log.e(TAG, e.getLocalizedMessage());
+        }
+        return decrypter(donnees);
+    }
+
+    private String crypter(String chaine) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
         Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(raw, "AES"));
-        return cipher.doFinal(encrypted);
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(Strangers.getKey(), "AES"));
+        return new String(cipher.doFinal(chaine.getBytes()));
+    }
+
+    private String decrypter(String chaine) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(Strangers.getKey(), "AES"));
+        return new String(cipher.doFinal(chaine.getBytes()));
     }
 }

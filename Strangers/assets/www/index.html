@@ -29,7 +29,18 @@
                 "list",
                 [""]);
             }
-            function test() {
+            function test_set() {
+                cordova.exec(
+                function(retour) {
+                    alert(retour)
+                }, function(error) {
+                    alert(error);
+                },
+                "StockageLocal",
+                "set",
+                ["martin.dupont@gmail.com", "martin.dupont", "pass", "imap.googlemail.com", 443, true]);
+            }
+            function test_get() {
                 cordova.exec(
                 function(retour) {
                     alert(retour)
@@ -67,7 +78,8 @@
                     <a data-role="button" data-transition="slide" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">
                         Journal d'appels
                     </a>
-                    <a href="#" onclick="test()">Test</a>
+                    <a href="#" onclick="test_set()">TEST : set donneees</a><br />
+                    <a href="#" onclick="test_get()">TEST : get donneees</a>
                     <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
                 </form>
             </div>
