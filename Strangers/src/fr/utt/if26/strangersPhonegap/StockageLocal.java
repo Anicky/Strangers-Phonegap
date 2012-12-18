@@ -20,7 +20,7 @@ public class StockageLocal extends CordovaPlugin {
     private final String ACTION_GET = "get";
     private final String ACTION_SET = "set";
     private final String TAG = "Plugin : StockageLocal";
-    private final String SETTINGS_FILE = "rer.properties";
+    private final String SETTINGS_FILE = "settings.properties";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
