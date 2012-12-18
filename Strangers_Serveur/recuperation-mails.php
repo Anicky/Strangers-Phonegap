@@ -82,14 +82,20 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                     $sortie.= '</article>';
                 }
 
+                // Mise en forme du numéro de téléphone à chercher : on enlève les espaces, les tirets, les points...pour ne garder qu'une suite de chiffres
+                $numero = preg_replace('/[^0-9]/', '', $numero);
                 // Séparation de la chaine de caractères en groupes de 2 numéros
                 $numero_parts = str_split($numero, 2);
 
                 // Création de l'expression régulière
                 $delimiter = "[-./\\ ]?";
                 $regexp = "#(";
-                foreach ($numero_parts as $part) {
-                    $regexp .= $part . $delimiter;
+                $numero_parts_length = count($numero_parts);
+                foreach ($numero_parts as $i => $part) {
+                    $regexp .= $part;
+                    if ($i <= $numero_parts_length - 2) {
+                        $regexp .= $delimiter;
+                    }
                 }
                 $regexp .= ")#";
 
