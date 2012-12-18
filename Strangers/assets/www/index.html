@@ -8,61 +8,7 @@
         <script src="js/cordova-2.2.0.js" charset="utf-8"></script>
         <script src="js/jquery.js" charset="utf-8"></script>
         <script src="js/jquery.mobile-1.2.0.js" charset="utf-8"></script>
-        <script>
-            document.addEventListener("deviceready", onDeviceReady, false);
-            function onDeviceReady() {
-                // Empty
-            }
-            function showCallList() {
-                cordova.exec(
-                function(listeAppels) {
-                    var html = "";
-                    for (i = 0; i < listeAppels.length; i++) {
-                        html += "<li><a href=\"#accueil\" data-transition=\"slide\" onclick=\"addNumber(" + listeAppels[i] + ")\">" + listeAppels[i] + "</a></li>";
-                    }
-                    $("#listeAppels").html(html);
-                    $("#listeAppels").listview("refresh");
-                }, function() {
-                    alert("Une erreur est survenue : le journal d'appels est indisponible.");
-                },
-                "JournalAppels",
-                "list",
-                [""]);
-            }
-            function debug_set() {
-                cordova.exec(
-                function(retour) {
-                    alert(retour);
-                }, function(error) {
-                    alert(error);
-                },
-                "StockageLocal",
-                "set",
-                [
-                    {email:'martin.dupont@gmail.com', user:'martin.dupont', pass:'test1', server:'iamp.googlemail.com', port:93, ssl:true},
-                    {email:'jeanne.darc@free.fr', user:'ja', pass:'test2', server:'imap.free.fr', port:62, ssl:false}
-                ]);
-            }
-            function getAccounts() {
-                cordova.exec(
-                function(listeComptes) {
-                    var html = "";
-                    for (i = 0; i < listeComptes.length; i++) {
-                        html += "<li><a href=\"#comptes-ajouter\" data-transition=\"slide\">" + listeComptes[i]['email'] + "</a></li>";
-                    }
-                    $("#listeComptes").html(html);
-                    $("#listeComptes").listview("refresh");
-                }, function(error) {
-                    alert("Une erreur est survenue : impossible de récupérer les comptes emails.");
-                },
-                "StockageLocal",
-                "get",
-                [""]);
-            }
-            function addNumber(numero) {
-                $("#accueil_telephone").val(numero);
-            }
-        </script>
+        <script src="js/fonctions.js" charset="utf-8"></script>
     </head>
     <body>
         <!-- Page d'accueil -->
@@ -79,9 +25,7 @@
                             <input name="telephone" id="accueil_telephone" type="tel" />
                         </fieldset>
                     </div>
-                    <a data-role="button" data-transition="slide" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">
-                        Journal d'appels
-                    </a>
+                    <a data-role="button" data-transition="slide" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">Journal d'appels</a>
                     <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
                 </form>
             </div>
@@ -95,26 +39,14 @@
             <div data-role="content">
                 <div data-role="navbar" data-iconpos="left">
                     <ul>
-                        <li>
-                            <a href="#comptes-liste" class="ui-btn-active ui-state-persist">
-                                Comptes email
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#options-recherche">
-                                Recherche
-                            </a>
-                        </li>
+                        <li><a href="#comptes-liste" class="ui-btn-active ui-state-persist">Comptes email</a></li>
+                        <li><a href="#options-recherche">Recherche</a></li>
                     </ul>
                 </div>
-                <a data-role="button" data-transition="slide" href="#comptes-ajouter" data-icon="plus" data-iconpos="left">
-                    Ajouter un compte email
-                </a>
-                <a href="#" onclick="debug_set()">DEBUT : set data</a><br />
-                <h2>
-                    Liste des comptes
-                </h2>
+                <h2>Liste des comptes</h2>
                 <ul data-role="listview" data-inset="true" id="listeComptes"></ul>
+                <a data-role="button" data-transition="slide" href="#comptes-ajouter" data-icon="plus" data-iconpos="left">Ajouter un compte email</a>
+                <a href="#" onclick="debug_set()">[DEBUG] Set data in "settings.properties"</a>
             </div>
         </div>
         <!-- Ajouter un compte -->
@@ -124,47 +56,35 @@
                 <h1>Strangers</h1>
             </div>
             <div data-role="content">
-                <h2>
-                    Ajouter un compte
-                </h2>
+                <h2>Ajouter un compte</h2>
                 <form action="ajout" method="POST">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <label for="compte_email">
-                                Adresse email
-                            </label>
+                            <label for="compte_email">Adresse email</label>
                             <input name="email" id="compte_email" placeholder="martin.dupont@gmail.com" type="email" />
                         </fieldset>
                     </div>
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <label for="compte_user">
-                                Nom d'utilisateur
-                            </label>
+                            <label for="compte_user">Nom d'utilisateur</label>
                             <input name="user" id="compte_user" type="text" />
                         </fieldset>
                     </div>
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <label for="compte_pass">
-                                Mot de passe
-                            </label>
+                            <label for="compte_pass">Mot de passe</label>
                             <input name="password" id="compte_pass" type="password" />
                         </fieldset>
                     </div>
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <label for="compte_server">
-                                Nom du serveur
-                            </label>
+                            <label for="compte_server">Nom du serveur</label>
                             <input name="server" id="compte_server" placeholder="imap.googlemail.com" type="text" />
                         </fieldset>
                     </div>
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
-                            <label for="compte_port">
-                                Port
-                            </label>
+                            <label for="compte_port">Port</label>
                             <input name="port" id="compte_port" placeholder="993" type="number" />
                         </fieldset>
                     </div>
@@ -181,16 +101,8 @@
             <div data-role="content">
                 <div data-role="navbar" data-iconpos="left">
                     <ul>
-                        <li>
-                            <a href="#comptes-liste">
-                                Comptes email
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#options-recherche" class="ui-btn-active ui-state-persist">
-                                Recherche
-                            </a>
-                        </li>
+                        <li><a href="#comptes-liste">Comptes email</a></li>
+                        <li><a href="#options-recherche" class="ui-btn-active ui-state-persist">Recherche</a></li>
                     </ul>
                 </div>
                 <!-- // @todo -->
@@ -204,9 +116,7 @@
                 <a href="#comptes-liste" data-transition="slide" data-icon="gear">Options</a>
             </div>
             <div data-role="content">
-                <h2>
-                    Journal d'appels
-                </h2>
+                <h2>Journal d'appels</h2>
                 <ul data-role="listview" data-inset="true" id="listeAppels"></ul>
             </div>
         </div>
