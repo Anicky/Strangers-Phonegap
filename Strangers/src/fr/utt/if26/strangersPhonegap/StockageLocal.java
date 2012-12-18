@@ -8,11 +8,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.cordova.api.CallbackContext;
@@ -27,10 +28,30 @@ import org.json.JSONException;
  */
 public class StockageLocal extends CordovaPlugin {
 
+    private byte[] key = null;
     private final String ACTION_GET = "get";
     private final String ACTION_SET = "set";
     private final String TAG = "Plugin : StockageLocal";
     private final String SETTINGS_FILE = "settings.dat";
+
+    private byte[] getKey() {
+        if (key == null) {
+            try {
+                createKey();
+            } catch (Exception ex) {
+                Log.e(TAG, ex.getLocalizedMessage());
+            }
+        }
+        return key;
+    }
+
+    private void createKey() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        sr.setSeed("06437129437961346794313579".getBytes("UTF8"));
+        kgen.init(sr);
+        key = kgen.generateKey().getEncoded();
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -66,6 +87,13 @@ public class StockageLocal extends CordovaPlugin {
         FileOutputStream fichier = null;
         OutputStreamWriter sortie = null;
 
+        Log.d(TAG, donnees);
+        try {
+            Log.d(TAG, decrypter(donnees));
+        } catch (Exception ex) {
+            Log.e(TAG, ex.getLocalizedMessage());
+        }
+
         try {
             fichier = cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_APPEND);
             sortie = new OutputStreamWriter(fichier);
@@ -100,13 +128,13 @@ public class StockageLocal extends CordovaPlugin {
 
     private String crypter(String chaine) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
         Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(Strangers.getKey(), "AES"));
-        return new String(cipher.doFinal(chaine.getBytes()));
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(getKey(), "AES"));
+        return new String(cipher.doFinal(chaine.getBytes("UTF8")));
     }
 
     private String decrypter(String chaine) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException {
         Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(Strangers.getKey(), "AES"));
-        return new String(cipher.doFinal(chaine.getBytes()));
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(getKey(), "AES"));
+        return new String(cipher.doFinal(chaine.getBytes("UTF8")));
     }
 }
