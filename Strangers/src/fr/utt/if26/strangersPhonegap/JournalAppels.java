@@ -27,6 +27,7 @@ public class JournalAppels extends CordovaPlugin {
         Log.d(TAG, "Plugin start");
         boolean resultat = true;
         if (action.equals(ACTION_LIST)) {
+            Log.d(TAG, "Action : List");
             try {
                 JSONArray listeAppels = list();
                 Log.d(TAG, "Returns :  " + listeAppels);

@@ -29,6 +29,17 @@
                 "list",
                 [""]);
             }
+            function test() {
+                cordova.exec(
+                function(retour) {
+                    alert(retour)
+                }, function(error) {
+                    alert(error);
+                },
+                "StockageLocal",
+                "get",
+                [""]);
+            }
             function addNumber(numero) {
                 $("#accueil_telephone").val(numero);
             }
@@ -56,6 +67,7 @@
                     <a data-role="button" data-transition="slide" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">
                         Journal d'appels
                     </a>
+                    <a href="#" onclick="test()">Test</a>
                     <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
                 </form>
             </div>
