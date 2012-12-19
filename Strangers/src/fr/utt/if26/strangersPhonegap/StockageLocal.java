@@ -2,6 +2,7 @@ package fr.utt.if26.strangersPhonegap;
 
 import android.content.Context;
 import android.util.Log;
+import fr.utt.if26.strangersPhonegap.outils.Cryptage;
 import java.io.IOException;
 import java.util.Properties;
 import org.apache.cordova.api.CallbackContext;
@@ -39,6 +40,14 @@ public class StockageLocal extends CordovaPlugin {
             Log.d(TAG, "Action : Set");
             try {
                 set(args);
+                
+                String test = "Blabla\nCeci est un test ! : \naccount.test=nop@true.fr";
+                Log.d(TAG, test);
+                String testcrypte = Cryptage.crypter(test);
+                Log.d(TAG, testcrypte);
+                String testdecrypte = Cryptage.decrypter(testcrypte);
+                Log.d(TAG, testdecrypte);
+                
                 Log.d(TAG, "Donnees sauvegardees");
             } catch (Exception ex) {
                 Log.e(TAG, ex.getLocalizedMessage());
