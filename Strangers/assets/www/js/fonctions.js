@@ -32,9 +32,9 @@ function debug_set() {
             email:'martin.dupont@gmail.com', 
             user:'martin.dupont', 
             pass:'test1', 
-            server:'iamp.googlemail.com', 
-            port:93, 
-            ssl:true
+            server:'imap.googlemail.com', 
+            port:'993', 
+            ssl:'1'
         },
 
         {
@@ -42,8 +42,8 @@ function debug_set() {
             user:'ja', 
             pass:'test2', 
             server:'imap.free.fr', 
-            port:62, 
-            ssl:false
+            port:'993', 
+            ssl:'0'
         }
         ]);
 }
@@ -52,7 +52,7 @@ function getAccounts() {
         function(listeComptes) {
             var html = "";
             for (i = 0; i < listeComptes.length; i++) {
-                html += '<li><a href="#comptes-ajouter" data-transition="slide">' + listeComptes[i]['email'] + '</a><a href="#comptes-supprimer" data-transition="slide"></a>';    
+                html += '<li><a href="#comptes-ajouter" data-transition="slide" onclick="editAccount(' + i + ')">' + listeComptes[i]['email'] + '</a><a href="#comptes-supprimer" data-transition="slide" onclick="deleteAccount(' + i + ')"></a>';    
             }
             $("#listeComptes").html(html);
             $("#listeComptes").listview("refresh");
@@ -67,3 +67,25 @@ function addNumber(numero) {
     $("#accueil_telephone").val(numero);
 }
 
+function editAccount(number) {
+    cordova.exec(
+        function(compte) {
+            $("#compte_email").val(compte['email']);
+            $("#compte_user").val(compte['user']);
+            $("#compte_pass").val(compte['pass']);
+            $("#compte_server").val(compte['server']);
+            $("#compte_port").val(compte['port']);
+            $("#compte_ssl").val(compte['ssl']);
+            $("#compte_ssl").slider("refresh");
+            
+        }, function(error) {
+            alert("Une erreur est survenue : impossible de récupérer le compte email.");
+        },
+        "StockageLocal",
+        "get",
+        [number]);
+}
+
+function deleteAccount(number) {
+    
+}
