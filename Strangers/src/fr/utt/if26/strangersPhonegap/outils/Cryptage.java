@@ -1,15 +1,13 @@
 package fr.utt.if26.strangersPhonegap.outils;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import javax.crypto.BadPaddingException;
+import android.util.Base64;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
 
 /**
  * Outils de cryptage/décryptage symétrique avec clé
@@ -18,36 +16,32 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class Cryptage {
 
-    private static byte[] key = null;
-    private static final String key_clear = "0645312789";
-    private final static String ALGORITHM_SECURERANDOM = "SHA1PRNG";
-    private final static String ALGORITHM_CIPHER = "AES";
+    private static final char[] PASSWORD = "zer1687EZT01er".toCharArray();
+    private static final byte[] SALT = {
+        (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
+        (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,};
 
-    private static byte[] getKey() throws NoSuchAlgorithmException {
-        if (key == null) {
-            key = generateKey();
-        }
-        return key;
+    public static String crypter(String property) throws GeneralSecurityException {
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+        SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
+        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
+        pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
+        return base64Encode(pbeCipher.doFinal(property.getBytes()));
     }
 
-    private static byte[] generateKey() throws NoSuchAlgorithmException {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM_CIPHER);
-        SecureRandom secureRandom = SecureRandom.getInstance(ALGORITHM_SECURERANDOM);
-        secureRandom.setSeed(key_clear.getBytes());
-        keyGenerator.init(128, secureRandom);
-        SecretKey secretKey = keyGenerator.generateKey();
-        return secretKey.getEncoded();
+    public static String decrypter(String property) throws GeneralSecurityException, IOException {
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+        SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
+        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
+        pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
+        return new String(pbeCipher.doFinal(base64Decode(property)));
     }
 
-    public static String crypter(String chaine) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance(ALGORITHM_CIPHER);
-        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(getKey(), ALGORITHM_CIPHER));
-        return new String(cipher.doFinal(chaine.getBytes()));
+    private static String base64Encode(byte[] bytes) {
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
-    public static String decrypter(String chaine) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance(ALGORITHM_CIPHER);
-        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(getKey(), ALGORITHM_CIPHER));
-        return new String(cipher.doFinal(chaine.getBytes()));
+    private static byte[] base64Decode(String property) throws IOException {
+        return Base64.decode(property, Base64.DEFAULT);
     }
 }
