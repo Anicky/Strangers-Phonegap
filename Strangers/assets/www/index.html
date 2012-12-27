@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="css/jquery-mobile.css" />
         <script src="js/cordova-2.2.0.js" charset="utf-8"></script>
         <script src="js/jquery.js" charset="utf-8"></script>
+        <script>
+            $(document).on("mobileinit", function(){
+                $.mobile.defaultPageTransition = 'slide';
+            });
+        </script>
         <script src="js/jquery-mobile.js" charset="utf-8"></script>
         <script src="js/jquery-form.js" charset="utf-8"></script>
         <script src="js/jquery-validation.js" charset="utf-8"></script>
@@ -17,17 +22,17 @@
         <div data-role="page" id="accueil">
             <div data-role="header">
                 <h1>Strangers</h1>
-                <a href="#comptes-liste" data-transition="slide" data-icon="gear" class="ui-btn-right" onclick="getAccounts()">Options</a>
+                <a href="#comptes-liste" data-icon="gear" class="ui-btn-right" onclick="getAccounts()">Options</a>
             </div>
             <div data-role="content">
-                <form action="ajout" method="POST">
+                <form action="ajout" method="post">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
                             <label for="accueil_telephone">Numéro de téléphone</label>
                             <input name="telephone" id="accueil_telephone" type="tel" />
                         </fieldset>
                     </div>
-                    <a data-role="button" data-transition="slide" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">Journal d'appels</a>
+                    <a data-role="button" href="#journal-appels" onclick="showCallList()" data-icon="info" data-iconpos="left">Journal d'appels</a>
                     <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
                 </form>
             </div>
@@ -35,7 +40,7 @@
         <!-- Liste des comptes -->
         <div data-role="page" id="comptes-liste">
             <div data-role="header">
-                <a href="#accueil" data-transition="slide" data-icon="home">Accueil</a>
+                <a href="#accueil" data-icon="home">Accueil</a>
                 <h1>Strangers</h1>
             </div>
             <div data-role="content">
@@ -54,12 +59,12 @@
         <!-- Ajouter un compte -->
         <div data-role="page" id="comptes-ajouter">
             <div data-role="header">
-                <a href="#comptes-liste" data-transition="slide" data-icon="back">Annuler</a>
+                <a href="#comptes-liste" data-icon="back">Annuler</a>
                 <h1>Strangers</h1>
             </div>
             <div data-role="content">
                 <h2>Ajouter un compte</h2>
-                <form action="ajout" method="POST">
+                <form action="ajout" method="post">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
                             <label for="compte_email">Adresse email</label>
@@ -87,7 +92,7 @@
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
                             <label for="compte_port">Port</label>
-                            <input name="port" id="compte_port" placeholder="993" type="number" />
+                            <input name="port" id="compte_port" value="993" type="number" />
                         </fieldset>
                     </div>
                     <div data-role="fieldcontain">
@@ -106,7 +111,7 @@
         <!-- Options de recherche -->
         <div data-role="page" id="options-recherche">
             <div data-role="header">
-                <a href="#accueil" data-transition="slide" data-icon="home">Accueil</a>
+                <a href="#accueil" data-icon="home">Accueil</a>
                 <h1>Strangers</h1>
             </div>
             <div data-role="content">
@@ -122,9 +127,9 @@
         <!-- Journal d'appels -->
         <div data-role="page" id="journal-appels">
             <div data-role="header">
-                <a href="#accueil" data-transition="slide" data-icon="home">Accueil</a>
+                <a href="#accueil" data-icon="home">Accueil</a>
                 <h1>Strangers</h1>
-                <a href="#comptes-liste" data-transition="slide" data-icon="gear">Options</a>
+                <a href="#comptes-liste" data-icon="gear">Options</a>
             </div>
             <div data-role="content">
                 <h2>Journal d'appels</h2>
