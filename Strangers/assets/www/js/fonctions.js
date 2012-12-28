@@ -21,7 +21,7 @@ function showCallList() {
 function debug_set() {
     cordova.exec(
         function(retour) {
-            alert(retour);
+            getAccounts();
         }, function(error) {
             alert(error);
         },
@@ -63,11 +63,12 @@ function getAccounts() {
         "get",
         [""]);
 }
+
 function addNumber(numero) {
     $("#accueil_telephone").val(numero);
 }
 
-function editAccount(number) {
+function editAccount(id) {
     cordova.exec(
         function(compte) {
             $("#compte_email").val(compte['email']);
@@ -83,9 +84,26 @@ function editAccount(number) {
         },
         "StockageLocal",
         "get",
-        [number]);
+        [id]);
 }
 
-function deleteAccount(number) {
-    
+function deleteAccount(id) {
+    navigator.notification.confirm(
+        'Etes-vous sûr de vouloir supprimer ce compte email ?',
+        function(button) {
+            if (button == 2) {
+                cordova.exec(
+                    function(ok) {
+                        getAccounts();
+                    }, function(error) {
+                        alert("Une erreur est survenue : impossible de supprimer le compte email.");
+                    },
+                    "StockageLocal",
+                    "delete",
+                    [id]);
+            }
+        },
+        'Suppression',
+        'Non,Oui'
+        );
 }
