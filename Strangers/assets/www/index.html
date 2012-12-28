@@ -23,7 +23,7 @@
         <div data-role="page" id="accueil">
             <div data-role="header">
                 <h1>Strangers</h1>
-                <a href="#comptes-liste" data-icon="gear" class="ui-btn-right" onclick="getAccounts()">Options</a>
+                <a href="#options" data-icon="gear" class="ui-btn-right" onclick="getAccounts()">Options</a>
             </div>
             <div data-role="content">
                 <form action="ajout" method="post">
@@ -40,18 +40,12 @@
         </div>
         
         <!-- Liste des comptes -->
-        <div data-role="page" id="comptes-liste">
+        <div data-role="page" id="options">
             <div data-role="header">
                 <a href="#accueil" data-icon="home">Accueil</a>
                 <h1>Strangers</h1>
             </div>
             <div data-role="content">
-                <div data-role="navbar" data-iconpos="left">
-                    <ul>
-                        <li><a href="#comptes-liste" class="ui-btn-active ui-state-persist">Comptes email</a></li>
-                        <li><a href="#options-recherche">Recherche</a></li>
-                    </ul>
-                </div>
                 <h2>Liste des comptes</h2>
                 <ul data-role="listview" data-inset="true" data-split-icon="delete" id="listeComptes"></ul>
                 <a data-role="button" data-icon="plus" data-iconpos="left" data-mini="true" data-inline="true" href="#comptes-ajouter">Ajouter un compte email</a>
@@ -62,7 +56,7 @@
         <!-- Ajouter un compte -->
         <div data-role="page" id="comptes-ajouter">
             <div data-role="header">
-                <a href="#comptes-liste" data-icon="back">Annuler</a>
+                <a href="#options" data-icon="back" onclick="getAccounts()">Annuler</a>
                 <h1>Strangers</h1>
             </div>
             <div data-role="content">
@@ -112,29 +106,11 @@
             </div>
         </div>
         
-        <!-- Options de recherche -->
-        <div data-role="page" id="options-recherche">
-            <div data-role="header">
-                <a href="#accueil" data-icon="home">Accueil</a>
-                <h1>Strangers</h1>
-            </div>
-            <div data-role="content">
-                <div data-role="navbar" data-iconpos="left">
-                    <ul>
-                        <li><a href="#comptes-liste">Comptes email</a></li>
-                        <li><a href="#options-recherche" class="ui-btn-active ui-state-persist">Recherche</a></li>
-                    </ul>
-                </div>
-                <!-- // @todo -->
-            </div>
-        </div>
-        
         <!-- Journal d'appels -->
         <div data-role="page" id="journal-appels">
             <div data-role="header">
-                <a href="#accueil" data-icon="home">Accueil</a>
+                <a href="#accueil" data-icon="back">Annuler</a>
                 <h1>Strangers</h1>
-                <a href="#comptes-liste" data-icon="gear">Options</a>
             </div>
             <div data-role="content">
                 <h2>Journal d'appels</h2>

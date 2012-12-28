@@ -7,7 +7,7 @@ function showCallList() {
         function(listeAppels) {
             var html = "";
             for (i = 0; i < listeAppels.length; i++) {
-                html += '<li><a href="#accueil" onclick="addNumber(' + listeAppels[i] + ')">' + listeAppels[i] + '</a></li>';
+                html += '<li><a href="#accueil" onclick="addNumber(\'' + listeAppels[i] + '\')">' + listeAppels[i] + '</a></li>';
             }
             $("#listeAppels").html(html);
             $("#listeAppels").listview("refresh");
