@@ -7,7 +7,7 @@ function showCallList() {
         function(listeAppels) {
             var html = "";
             for (i = 0; i < listeAppels.length; i++) {
-                html += '<li><a href="#accueil" data-transition="slide" onclick="addNumber(' + listeAppels[i] + ')">' + listeAppels[i] + '</a></li>';
+                html += '<li><a href="#accueil" onclick="addNumber(' + listeAppels[i] + ')">' + listeAppels[i] + '</a></li>';
             }
             $("#listeAppels").html(html);
             $("#listeAppels").listview("refresh");
@@ -52,7 +52,7 @@ function getAccounts() {
         function(listeComptes) {
             var html = "";
             for (i = 0; i < listeComptes.length; i++) {
-                html += '<li><a href="#comptes-ajouter" data-transition="slide" onclick="editAccount(' + i + ')">' + listeComptes[i]['email'] + '</a><a href="#comptes-supprimer" data-transition="slide" onclick="deleteAccount(' + i + ')"></a>';    
+                html += '<li><a href="#comptes-ajouter" onclick="editAccount(' + i + ')">' + listeComptes[i]['email'] + '</a><a href="#comptes-supprimer" onclick="deleteAccount(' + i + ')"></a>';    
             }
             $("#listeComptes").html(html);
             $("#listeComptes").listview("refresh");
