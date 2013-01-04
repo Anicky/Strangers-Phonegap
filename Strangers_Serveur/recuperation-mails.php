@@ -59,6 +59,36 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 if ($nombre_emails == 0) {
                     $nombre_emails = count($emails);
                 }
+                
+                ////////////////////////////////////////////////////:
+                
+                
+                // Mise en forme du numéro de téléphone à chercher : on enlève les espaces, les tirets, les points...pour ne garder qu'une suite de chiffres
+                $numero = preg_replace('/[^0-9]/', '', $numero);
+                // Séparation de la chaine de caractères en groupes de 2 numéros
+                $numero_parts = str_split($numero, 2);
+                               
+                // Création de l'expression régulière
+                $delimiter = "[-./\\ ]?";
+                $regexp = "#(";
+                $numero_parts_length = count($numero_parts);
+                foreach ($numero_parts as $i => $part) {
+                    $regexp .= $part;
+                   
+                    if ($i <= $numero_parts_length - 2) {
+                        $regexp .= $delimiter;
+                    }
+                }
+                $regexp .= ")#";
+
+                // Chaine de remplacement (là on leur applique un style CSS pour les repérer facilement sur la page !)
+                $remplacement = '<span class="telephoneTrouve">${1}</span>';
+
+                $matches[]="";
+                $nom='';
+                $tableauDesNoms[]='';
+                ////////////////////////////////////////////////////:
+                
 
                 for ($i = 0; $i < $nombre_emails; $i++) {
 
@@ -70,55 +100,25 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
 
                     /* Affichage de l'entete de l'email */
                     $sortie.= '<article>';
-                    $sortie.= '<div class="header-' . ($apercu[0]->seen ? 'lu' : 'non-lu') . '">';
-                    $sortie.= '<span class="sujet">Sujet : <strong>' . $apercu[0]->subject . '</strong></span> ';
-                    $sortie.= '<span class="expediteur">Expéditeur : ' . $apercu[0]->from . '</span>';
-                    $sortie.= '<span class="date">Date : <em>' . $apercu[0]->date . '</em></span>';
-                    $sortie.= '</div>';
-
-                    /* Affichage du corps de l'email */
                     $sortie.= '<div class="body">' . $message . '</div>';
 
                     $sortie.= '</article>';
+                   // echo $apercu[0]->from ; 
+                   // echo '<br/>';
+                
+                $nom=$apercu[0]->from;
+                $tableauDesNoms[$i]=$apercu[0]->from;
+                $sortie = preg_match($regexp ,$sortie, $matches[$nom] );
+                
                 }
-
-                // Mise en forme du numéro de téléphone à chercher : on enlève les espaces, les tirets, les points...pour ne garder qu'une suite de chiffres
-                $numero = preg_replace('/[^0-9]/', '', $numero);
-                // Séparation de la chaine de caractères en groupes de 2 numéros
-                $numero_parts = str_split($numero, 2);
-
-                // Création de l'expression régulière
-                $delimiter = "[-./\\ ]?";
-                $regexp = "#(";
-                $numero_parts_length = count($numero_parts);
-                foreach ($numero_parts as $i => $part) {
-                    $regexp .= $part;
-                    if ($i <= $numero_parts_length - 2) {
-                        $regexp .= $delimiter;
+                for ($i = 0; $i < $nombre_emails; $i++) {
+                    $name=$tableauDesNoms[$i];
+                    if(count($matches[$name]) != 0){
+                        echo $name;echo $matches[$name][1]; 
+                        echo '<br/>';
                     }
-                }
-                $regexp .= ")#";
-
-                // Chaine de remplacement (là on leur applique un style CSS pour les repérer facilement sur la page !)
-                $remplacement = '<span class="telephoneTrouve">${1}</span>';
-
-                // Remplacement des numéros de téléphone
-                $sortie = preg_replace($regexp, $remplacement, $sortie);
-
-                // Debug
-                ?>
-                <div class="debug">
-                    <h1>Debug</h1><br />
-                    <?php
-                    echo "Numéro : " . $numero . " (" . strlen($numero) . " caracteres)<br />";
-                    var_dump($numero_parts);
-                    echo "Expression régulière : " . $regexp;
-                    ?>
-                </div>
-                <?php
-                // Affichage des mails avec numéro de téléphone trouvé affiché en gras et rouge
-                echo $sortie;
-            }
+              }
+          }
         }
         imap_close($inbox);
     }
