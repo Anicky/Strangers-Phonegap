@@ -20,10 +20,18 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
         $username = htmlspecialchars($_POST['user']);
         $password = htmlspecialchars($_POST['pass']);
 
-        $folders = array("INBOX");
+//        $folders = array("INBOX");
+//        if (isset($_POST['folders'])) {
+//            $folders = $_POST['folders'];
+//        }
+        
+        
+        $folders = $_POST['folders'];
         if (isset($_POST['folders'])) {
             $folders = $_POST['folders'];
         }
+        
+        
 
         $numero = "";
         if (isset($_POST['num'])) {
@@ -82,7 +90,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 $regexp .= ")#";
 
                 // Chaine de remplacement (là on leur applique un style CSS pour les repérer facilement sur la page !)
-                $remplacement = '<span class="telephoneTrouve">${1}</span>';
+               // $remplacement = '<span class="telephoneTrouve">${1}</span>';
 
                 $matches[]="";
                 $nom='';
@@ -113,10 +121,12 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 for ($i = 0; $i < $nombre_emails; $i++) {
                     $name=$tableauDesNoms[$i];
                     if(count($matches[$name]) != 0){
-                        echo $name;echo $matches[$name][1]; 
+                        echo $name;
+                        echo $matches[$name][1]; 
                         echo '<br/>';
+                        exit;
                     }
-                    else echo 'pas de résultats';
+                   
               }
           }
         }
