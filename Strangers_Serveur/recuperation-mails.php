@@ -103,8 +103,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                     $sortie.= '<div class="body">' . $message . '</div>';
 
                     $sortie.= '</article>';
-                   // echo $apercu[0]->from ; 
-                   // echo '<br/>';
+                   
                 
                 $nom=$apercu[0]->from;
                 $tableauDesNoms[$i]=$apercu[0]->from;
@@ -117,6 +116,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                         echo $name;echo $matches[$name][1]; 
                         echo '<br/>';
                     }
+                    else echo 'pas de résultats';
               }
           }
         }
