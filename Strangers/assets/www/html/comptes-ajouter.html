@@ -1,0 +1,51 @@
+<div data-role="page" id="comptes-ajouter">
+    <div data-role="header">
+        <a href="comptes-liste.html" data-icon="back">Annuler</a>
+        <h1>Strangers</h1>
+    </div>
+    <div data-role="content">
+        <h2>Ajouter un compte</h2>
+        <form action="ajout" method="post">
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="compte_email">Adresse email</label>
+                    <input name="email" id="compte_email" placeholder="martin.dupont@gmail.com" type="email" />
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="compte_user">Nom d'utilisateur</label>
+                    <input name="user" id="compte_user" type="text" />
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="compte_pass">Mot de passe</label>
+                    <input name="password" id="compte_pass" type="password" />
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="compte_server">Nom du serveur</label>
+                    <input name="server" id="compte_server" placeholder="imap.googlemail.com" type="text" />
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="compte_port">Port</label>
+                    <input name="port" id="compte_port" value="993" type="number" />
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="compte_ssl">Connexion SSL</label>
+                    <select name="compte_ssl" id="compte_ssl" data-role="slider">
+                        <option value="0">Non</option>
+                        <option value="1">Oui</option>
+                    </select> 
+                </fieldset>
+            </div>
+            <input data-icon="check" data-iconpos="left" value="Tester la connexion" type="submit" />
+        </form>
+    </div>
+</div>

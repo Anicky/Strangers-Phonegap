@@ -1,16 +1,39 @@
 document.addEventListener("deviceready", onDeviceReady, false);
+
 function onDeviceReady() {
 // Empty
 }
+
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1;
+    var queryEnd   = url.indexOf("#") + 1 || url.length + 1;
+    var query      = url.slice(queryStart, queryEnd - 1);
+
+    if (query === url || query === "") return;
+
+    var params  = {};
+    var nvPairs = query.replace(/\+/g, " ").split("&");
+
+    for (var i=0; i<nvPairs.length; i++) {
+        var nv = nvPairs[i].split("=");
+        var n  = decodeURIComponent(nv[0]);
+        var v  = decodeURIComponent(nv[1]);
+        if ( !(n in params) ) {
+            params[n] = [];
+        }
+        params[n].push(nv.length === 2 ? v : null);
+    }
+    return params;
+}
+
 function showCallList() {
     cordova.exec(
         function(listeAppels) {
             var html = "";
             for (i = 0; i < listeAppels.length; i++) {
-                html += '<li><a href="#accueil" onclick="addNumber(\'' + listeAppels[i] + '\')">' + listeAppels[i] + '</a></li>';
+                html += '<li><a href="../index.html" onclick="addNumber(\'' + listeAppels[i] + '\')">' + listeAppels[i] + '</a></li>';
             }
             $("#listeAppels").html(html);
-            $("#listeAppels").listview("refresh");
         }, function() {
             alert("Une erreur est survenue : le journal d'appels est indisponible.");
         },
@@ -18,10 +41,12 @@ function showCallList() {
         "list",
         [""]);
 }
+
 function debug_set() {
     cordova.exec(
         function(retour) {
             getAccounts();
+            $("#listeComptes").listview("refresh");
         }, function(error) {
             alert(error);
         },
@@ -47,15 +72,15 @@ function debug_set() {
         }
         ]);
 }
+
 function getAccounts() {
     cordova.exec(
         function(listeComptes) {
             var html = "";
             for (i = 0; i < listeComptes.length; i++) {
-                html += '<li><a href="#comptes-ajouter" onclick="editAccount(' + i + ')">' + listeComptes[i]['email'] + '</a><a href="#comptes-supprimer" onclick="deleteAccount(' + i + ')"></a>';    
+                html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + listeComptes[i]['email'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';    
             }
             $("#listeComptes").html(html);
-            $("#listeComptes").listview("refresh");
         }, function(error) {
             alert("Une erreur est survenue : impossible de récupérer les comptes emails.");
         },
@@ -76,7 +101,6 @@ function editAccount(id) {
         $("#compte_server").val("");
         $("#compte_port").val("");
         $("#compte_ssl").val("0");
-        $("#compte_ssl").slider("refresh");
     } else {
         cordova.exec(
             function(compte) {
@@ -86,7 +110,6 @@ function editAccount(id) {
                 $("#compte_server").val(compte['server']);
                 $("#compte_port").val(compte['port']);
                 $("#compte_ssl").val(compte['ssl']);
-                $("#compte_ssl").slider("refresh");
             }, function(error) {
                 alert("Une erreur est survenue : impossible de récupérer le compte email.");
             },
@@ -104,6 +127,7 @@ function deleteAccount(id) {
                 cordova.exec(
                     function(ok) {
                         getAccounts();
+                        $("#listeComptes").listview("refresh");
                     }, function(error) {
                         alert("Une erreur est survenue : impossible de supprimer le compte email.");
                     },
