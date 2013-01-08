@@ -69,22 +69,31 @@ function addNumber(numero) {
 }
 
 function editAccount(id) {
-    cordova.exec(
-        function(compte) {
-            $("#compte_email").val(compte['email']);
-            $("#compte_user").val(compte['user']);
-            $("#compte_pass").val(compte['pass']);
-            $("#compte_server").val(compte['server']);
-            $("#compte_port").val(compte['port']);
-            $("#compte_ssl").val(compte['ssl']);
-            $("#compte_ssl").slider("refresh");
-            
-        }, function(error) {
-            alert("Une erreur est survenue : impossible de récupérer le compte email.");
-        },
-        "StockageLocal",
-        "get",
-        [id]);
+    if ((id != 0) && (id == "")) {
+        $("#compte_email").val("");
+        $("#compte_user").val("");
+        $("#compte_pass").val("");
+        $("#compte_server").val("");
+        $("#compte_port").val("");
+        $("#compte_ssl").val("0");
+        $("#compte_ssl").slider("refresh");
+    } else {
+        cordova.exec(
+            function(compte) {
+                $("#compte_email").val(compte['email']);
+                $("#compte_user").val(compte['user']);
+                $("#compte_pass").val(compte['pass']);
+                $("#compte_server").val(compte['server']);
+                $("#compte_port").val(compte['port']);
+                $("#compte_ssl").val(compte['ssl']);
+                $("#compte_ssl").slider("refresh");
+            }, function(error) {
+                alert("Une erreur est survenue : impossible de récupérer le compte email.");
+            },
+            "StockageLocal",
+            "get",
+            [id]);
+    }
 }
 
 function deleteAccount(id) {
