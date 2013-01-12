@@ -3,6 +3,7 @@ package fr.utt.if26.strangersPhonegap;
 import android.content.Context;
 import android.util.Log;
 import fr.utt.if26.strangersPhonegap.outils.Cryptage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Properties;
@@ -41,6 +42,9 @@ public class StockageLocal extends CordovaPlugin {
                     Log.d(TAG, "Returns :  " + compte);
                     callbackContext.success(compte);
                 }
+            } catch (FileNotFoundException ex) {
+                Log.d(TAG, ex.getLocalizedMessage());
+                callbackContext.success("");
             } catch (Exception ex) {
                 Log.e(TAG, ex.getLocalizedMessage());
                 callbackContext.error(0);

@@ -1,27 +1,24 @@
-document.addEventListener("deviceready", onDeviceReady, false);
-
-function onDeviceReady() {
-// Empty
-}
+var URL_SERVER = "https://79.89.35.90/strangers/";
 
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1;
     var queryEnd   = url.indexOf("#") + 1 || url.length + 1;
     var query      = url.slice(queryStart, queryEnd - 1);
 
-    if (query === url || query === "") return;
+    var params = null;
+    if (query !== url && query !== "") {
+        params  = {};
+        var nvPairs = query.replace(/\+/g, " ").split("&");
 
-    var params  = {};
-    var nvPairs = query.replace(/\+/g, " ").split("&");
-
-    for (var i=0; i<nvPairs.length; i++) {
-        var nv = nvPairs[i].split("=");
-        var n  = decodeURIComponent(nv[0]);
-        var v  = decodeURIComponent(nv[1]);
-        if ( !(n in params) ) {
-            params[n] = [];
+        for (var i=0; i<nvPairs.length; i++) {
+            var nv = nvPairs[i].split("=");
+            var n  = decodeURIComponent(nv[0]);
+            var v  = decodeURIComponent(nv[1]);
+            if ( !(n in params) ) {
+                params[n] = [];
+            }
+            params[n].push(nv.length === 2 ? v : null);
         }
-        params[n].push(nv.length === 2 ? v : null);
     }
     return params;
 }
