@@ -16,7 +16,7 @@
  * num : on renvoie le numéro, l'utilisateur peut vérifier si la recherche a bien trouvé le même numéro
  * name : le prénom et nom de la personne qui envoie (on se base sur l'entête du mail, le "FROM")
  */
-$reponse = "{status:'error'}";
+$reponse = '{"status":"error"}';
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass'])) && (isset($_POST['num']))) {
     if (($_POST['serv'] != "") && ($_POST['port'] != "") && ($_POST['user'] != "") && ($_POST['pass'] != "") && ($_POST['num'] != "")) {
         $serveur = htmlspecialchars($_POST['serv']);
@@ -114,13 +114,13 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 while ((!$trouve) && ($i < $nombre_emails)) {
                     $name = $tableauDesNoms[$i];
                     if (count($matches[$name]) != 0) {
-                        $reponse = "{status:'ok',num:'" . $matches[$name][1] . "',name:'" . $name . "'}";
+                        $reponse = '{"status":"ok","num":"' . $matches[$name][1] . '","name":"' . $name . '}';
                         $trouve = true;
                     }
                     $i++;
                 }
                 if (!$trouve) {
-                    $reponse = "{status:'not found'}";
+                    $reponse = '{"status":"not found"}';
                 }
             }
         }

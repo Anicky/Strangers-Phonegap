@@ -12,7 +12,7 @@
  * status : 'error' si une erreur s'est produite, 'ok' si la fonction s'est bien déroulée
  * boxes : un tableau avec la liste des noms des boîtes mail
  */
-$reponse = "{status:'error'}";
+$reponse = '{"status":"error"}';
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
     if (($_POST['serv'] != "") && ($_POST['port'] != "") && ($_POST['user'] != "") && ($_POST['pass'] != "")) {
         $serveur = htmlspecialchars($_POST['serv']);
@@ -27,7 +27,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
         $hostname = get_hostname($serveur, $port, $ssl);
         $liste_boites = get_boites($hostname, $username, $password);
         if ($liste_boites) {
-            $reponse = "{status:'ok',boxes:" . json_encode($liste_boites) . "}";
+            $reponse = '{"status":"ok","boxes":' . json_encode($liste_boites) . '}';
         }
     }
 }
