@@ -11,7 +11,10 @@
  * folders : Les dossiers où chercher les mails (par défaut : INBOX (boite de réception))
  * ssl : Sécurité de la connexion : aucune ou SSL/TLS (par défaut : aucune)
  * nb : Nombre de mails à récupérer (du + récent au + ancien)
- * 
+ * Réponse :
+ * status : 'error' si une erreur s'est produite, 'not found' si le numéro n'a pas été trouvé, 'ok' si un numéro a été trouvé
+ * num : on renvoie le numéro, l'utilisateur peut vérifier si la recherche a bien trouvé le même numéro
+ * name : le prénom et nom de la personne qui envoie (on se base sur l'entête du mail, le "FROM")
  */
 $reponse = "{status:'error'}";
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass'])) && (isset($_POST['num']))) {
@@ -115,6 +118,9 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                         $trouve = true;
                     }
                     $i++;
+                }
+                if (!$trouve) {
+                    $reponse = "{status:'not found'}";
                 }
             }
         }

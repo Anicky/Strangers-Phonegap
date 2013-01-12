@@ -8,6 +8,9 @@
  * pass : Le mot de passe
  * Paramètres (facultatifs) :
  * ssl : Sécurité de la connexion : aucune ou SSL/TLS (par défaut : aucune)
+ * Réponse :
+ * status : 'error' si une erreur s'est produite, 'ok' si la fonction s'est bien déroulée
+ * boxes : un tableau avec la liste des noms des boîtes mail
  */
 $reponse = "{status:'error'}";
 if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass']))) {
@@ -24,7 +27,7 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
         $hostname = get_hostname($serveur, $port, $ssl);
         $liste_boites = get_boites($hostname, $username, $password);
         if ($liste_boites) {
-            $reponse = "{status:'ok',hostname:'" . $hostname . "',boxes:" . json_encode($liste_boites) . "}";
+            $reponse = "{status:'ok',boxes:" . json_encode($liste_boites) . "}";
         }
     }
 }
