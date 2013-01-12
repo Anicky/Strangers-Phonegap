@@ -1,4 +1,4 @@
-var URL_SERVER = "https://79.89.35.90/strangers/";
+var URL_SERVER = "https://192.168.0.3/strangers/";
 
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1;
@@ -96,7 +96,7 @@ function editAccount(id) {
         $("#compte_user").val("");
         $("#compte_pass").val("");
         $("#compte_server").val("");
-        $("#compte_port").val("");
+        $("#compte_port").val("993");
         $("#compte_ssl").val("0");
     } else {
         cordova.exec(
