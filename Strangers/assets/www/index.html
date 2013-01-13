@@ -37,11 +37,7 @@
         </div>
         <script>
             $("#recherche").submit(function(){
-                var formData = $(this).serialize();
-                formData.params = getAccounts();
-                alert(formData);
-                alert(formData.num);
-                alert(formData.params);
+                var formData = $(this).serialize() + "&params=" + getAccounts();
                 $.ajax({
                     type: "post",
                     data: formData,
@@ -53,7 +49,7 @@
                         } else if (d.status == "not found") {
                             alert("La recherche n'a donné aucun résultat.");
                         } else {
-                            alert("Erreur : impossible de contacter le serveur.")
+                            alert("Erreur : vérifiez les paramètres de vos comptes email.")
                         }
                     },
                     error: function(){

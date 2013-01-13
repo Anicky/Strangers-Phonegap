@@ -88,9 +88,7 @@ function showAccounts() {
     var comptes = getAccounts();
     var html = "";
     for (var i = 0; i < comptes.length; i++) {
-        if (comptes[i] != null) {
-            html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + comptes[i]['mail'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';  
-        }
+        html += '<li><a href="comptes-ajouter.html?id=' + comptes[i]['id'] + '">' + comptes[i]['mail'] + '</a><a href="#" onclick="deleteAccount(' + comptes[i]['id'] + ')"></a>';  
     }
     $("#listeComptes").html(html);
 }
