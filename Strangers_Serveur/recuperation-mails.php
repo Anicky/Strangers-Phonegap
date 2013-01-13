@@ -111,7 +111,7 @@ if ((isset($_POST['params'])) && (isset($_POST['num']))) {
                 while ((!$trouve) && ($i < $nombre_emails)) {
                     $name = $tableauDesNoms[$i];
                     if (count($matches[$name]) != 0) {
-                        $reponse = '{"status":"ok","num":"' . $matches[$name][1] . '","name":"' . $name . '}';
+                        $reponse = '{"status":"ok","num":"' . $matches[$name][1] . '","name":"' . $name . '"}';
                         $trouve = true;
                     }
                     $i++;
