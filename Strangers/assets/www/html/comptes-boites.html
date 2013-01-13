@@ -6,15 +6,7 @@
     <div data-role="content">
         <h2>Ajouter un compte</h2>
         <form id="selection-boites">
-            <div data-role="fieldcontain">
-                <fieldset data-role="controlgroup">
-                    <legend>Boîtes :</legend>
-                    <input type="checkbox" name="boite_1" id="boite_1" class="custom" />
-                    <label for="boite_1">test 1</label>
-                    <input type="checkbox" name="boite_2" id="boite_2" class="custom" />
-                    <label for="boite_2">test 2</label>
-                </fieldset>
-            </div>
+            <div data-role="fieldcontain" id="boites"></div>
             <input type="hidden" name="mail" value="" id="compte_email" />
             <input type="hidden" name="user" value="" id="compte_user" />
             <input type="hidden" name="pass" value="" id="compte_pass" />
@@ -24,7 +16,7 @@
             <input data-icon="check" data-iconpos="left" value="Valider" type="submit" />
         </form>
         <script>
-            $(document).bind("pagechange",function(e,d){
+            $(document).live("pagechange",function(e,d){
                 if(d.options.data){
                     $("#compte_email").val(d.options.data.mail);
                     $("#compte_user").val(d.options.data.user);
@@ -32,12 +24,21 @@
                     $("#compte_server").val(d.options.data.serv);
                     $("#compte_port").val(d.options.data.port);
                     $("#compte_ssl").val(d.options.data.ssl);
-                    alert(d.options.data.boxes);
+                    var boxes = d.options.data.boxes;
+                    var boites = '<fieldset data-role="controlgroup"><legend>Boîtes dans lesquelles rechercher les emails :</legend>';
+                    for(var i = 0; i < boxes.length; i++){
+                        boites += '<input type="checkbox" name="boxes[]" id="boite_' + i + '" class="custom" value="' + boxes[i] + '" checked="true" />';
+                        boites += '<label for="boite_' + i + '">' + boxes[i] + '</label>';
+                    }
+                    boites += '</fieldset>';
+                    $("#boites").html(boites);
+                    $("#comptes-boites").page('destroy').page();
                 }
             });
             $("#selection-boites").submit(function(){
-                var postData = $(this).serialize();
-                alert(postData);
+                if (setAccount($(this).formParams())) {
+                    $.mobile.changePage("comptes-liste.html", {});
+                }
                 return false;
             });
         </script>

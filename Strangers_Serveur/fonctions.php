@@ -1,6 +1,10 @@
 <?php
 
-/**
+/**pe $server L'adresse du serveur
+ * @param type $port Le numéro de port
+ * @param type $ssl Indique si la connexion est en SSL
+ * @param type $folder Le dossier à ouvrir
+ * @return type
  * Créé une adresse pour accéder à un compte email
  * @param type $server L'adresse du serveur
  * @param type $port Le numéro de port

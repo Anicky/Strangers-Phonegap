@@ -56,8 +56,8 @@
         </tr>
         <tr>
             <td colspan="2" class="colspan">
-                <input type="checkbox" name="ssl" id="ssl" value="1" />
-                <label for="ssl" class="checkbox">SSL</label>
+                <input type="checkbox" name="ssl"  checked="yes" id="ssl" value="1" />
+                <label for="ssl" class="checkbox" checked="yes" >SSL</label>
             </td>
             <td></td>
         </tr>

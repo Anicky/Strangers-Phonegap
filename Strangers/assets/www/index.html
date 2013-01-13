@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Strangers (version Phonegap)</title>
         <link rel="stylesheet" href="css/jquery-mobile.css" />
-        <script src="js/cordova-2.2.0.js" charset="utf-8"></script>
+        <script src="js/cordova-2.3.0.js" charset="utf-8"></script>
         <script src="js/jquery.js" charset="utf-8"></script>
         <script src="js/jquery-formParams.js" charset="utf-8"></script>
         <script>
@@ -15,22 +15,6 @@
         </script>
         <script src="js/jquery-mobile.js" charset="utf-8"></script>
         <script src="js/fonctions.js" charset="utf-8"></script>
-        <script>
-            $('#options').live('pagecreate', function(event){
-                getAccounts();
-            });
-            $('#journal-appels').live('pagecreate', function(event){
-                showCallList();
-            });
-            $("#comptes-ajouter").live("pagecreate", function(event){
-                var params = parseURLParams($(this).attr("data-url"));
-                var id = null;
-                if (params != null) {
-                    id = JSON.parse(params["id"]);
-                }
-                editAccount(id);
-            });
-        </script>
     </head>
     <body>
         <div data-role="page" id="accueil">

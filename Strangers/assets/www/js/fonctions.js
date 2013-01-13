@@ -1,5 +1,22 @@
 var URL_SERVER = "https://192.168.1.11/strangers/";
 
+$('#options').live('pagecreate', function(event){
+    getAccounts();
+});
+
+$('#journal-appels').live('pagecreate', function(event){
+    showCallList();
+});
+
+$("#comptes-ajouter").live("pagecreate", function(event){
+    var params = parseURLParams($(this).attr("data-url"));
+    var id = null;
+    if (params != null) {
+        id = JSON.parse(params["id"]);
+    }
+    editAccount(id);
+});
+
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1;
     var queryEnd   = url.indexOf("#") + 1 || url.length + 1;
@@ -27,7 +44,7 @@ function showCallList() {
     cordova.exec(
         function(listeAppels) {
             var html = "";
-            for (i = 0; i < listeAppels.length; i++) {
+            for (var i = 0; i < listeAppels.length; i++) {
                 html += '<li><a href="../index.html" onclick="addNumber(\'' + listeAppels[i] + '\')">' + listeAppels[i] + '</a></li>';
             }
             $("#listeAppels").html(html);
@@ -39,44 +56,28 @@ function showCallList() {
         [""]);
 }
 
-function debug_set() {
+function setAccount(json_args) {
+    var ok = false;
     cordova.exec(
         function(retour) {
-            getAccounts();
-            $("#listeComptes").listview("refresh");
+            ok = true;
         }, function(error) {
             alert(error);
         },
         "StockageLocal",
         "set",
-        [
-        {
-            "mail":"martin.dupont@gmail.com", 
-            "user":"martin.dupont", 
-            "pass":"test1", 
-            "serv":"imap.googlemail.com", 
-            "port":"993", 
-            "ssl":"1",
-            "boxes":["INBOX", "SENT"]
-        },
-        {
-            "mail":"jeanne.darc@free.fr", 
-            "user":"ja", 
-            "pass":"test2", 
-            "serv":"imap.free.fr", 
-            "port":"993", 
-            "ssl":"0",
-            "boxes":["INBOX"]
-        }
-        ]);
+        [json_args]);
+    return ok;
 }
 
 function getAccounts() {
     cordova.exec(
         function(listeComptes) {
             var html = "";
-            for (i = 0; i < listeComptes.length; i++) {
-                html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + listeComptes[i]['mail'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';    
+            for (var i = 0; i < listeComptes.length; i++) {
+                if (listeComptes[i] != null) {
+                    html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + listeComptes[i]['mail'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';  
+                }
             }
             $("#listeComptes").html(html);
         }, function(error) {
