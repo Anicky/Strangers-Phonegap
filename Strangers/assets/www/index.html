@@ -23,11 +23,11 @@
                 <a href="html/comptes-liste.html" data-icon="gear" class="ui-btn-right">Options</a>
             </div>
             <div data-role="content">
-                <form action="ajout" method="post">
+                <form id="recherche">
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup">
                             <label for="accueil_telephone">Numéro de téléphone</label>
-                            <input name="telephone" id="accueil_telephone" type="tel" />
+                            <input name="num" id="accueil_telephone" type="tel" />
                         </fieldset>
                     </div>
                     <a data-role="button" href="html/journal-appels.html" data-icon="info" data-iconpos="left">Journal d'appels</a>
@@ -35,5 +35,33 @@
                 </form>
             </div>
         </div>
+        <script>
+            $("#recherche").submit(function(){
+                var formData = $(this).serialize();
+                formData.params = getAccounts();
+                alert(formData);
+                alert(formData.num);
+                alert(formData.params);
+                $.ajax({
+                    type: "post",
+                    data: formData,
+                    url: URL_SERVER + 'recuperation-mails.php',
+                    success: function(d){
+                        d = JSON.parse(d);
+                        if (d.status == "ok") {
+                            alert("Un résultat trouvé : " + d.name);
+                        } else if (d.status == "not found") {
+                            alert("La recherche n'a donné aucun résultat.");
+                        } else {
+                            alert("Erreur : impossible de contacter le serveur.")
+                        }
+                    },
+                    error: function(){
+                        alert('Erreur : impossible de contacter le serveur.');
+                    }
+                });
+                return false;
+            });
+        </script>
     </body>
 </html>
