@@ -37,25 +37,54 @@
         </div>
         <script>
             $("#recherche").submit(function(){
-                var formData = $(this).serialize() + "&params=" + getAccounts();
-                $.ajax({
-                    type: "post",
-                    data: formData,
-                    url: URL_SERVER + 'recuperation-mails.php',
-                    success: function(d){
-                        d = JSON.parse(d);
-                        if (d.status == "ok") {
-                            alert("Un résultat trouvé : " + d.name);
-                        } else if (d.status == "not found") {
-                            alert("La recherche n'a donné aucun résultat.");
-                        } else {
-                            alert("Erreur : vérifiez les paramètres de vos comptes email.")
+                if ($("#accueil_telephone").val() != "") {
+                    var formData = $(this).serialize() + "&params=" + JSON.stringify(getAccounts());
+                    $.ajax({
+                        type: "post",
+                        data: formData,
+                        url: URL_SERVER + 'recuperation-mails.php',
+                        success: function(d){
+                            d = JSON.parse(d);
+                            if (d.status == "ok") {
+                                navigator.notification.alert(
+                                'Le numéro appartient à : ' + d.name,
+                                null,
+                                'Résultat',
+                                'Fermer'
+                            );
+                            } else if (d.status == "not found") {
+                                navigator.notification.alert(
+                                "La recherche n'a donné aucun résultat.",
+                                null,
+                                'Résultat',
+                                'Fermer'
+                            );
+                            } else {
+                                navigator.notification.alert(
+                                'Vérifiez les paramètres de vos comptes emails.',
+                                null,
+                                'Erreur',
+                                'Fermer'
+                            );
+                            }
+                        },
+                        error: function(){
+                            navigator.notification.alert(
+                            'Impossible de contacter le serveur.',
+                            null,
+                            'Erreur',
+                            'Fermer'
+                        );
                         }
-                    },
-                    error: function(){
-                        alert('Erreur : impossible de contacter le serveur.');
-                    }
-                });
+                    });
+                } else {
+                    navigator.notification.alert(
+                    'Vous devez indiquer un numéro de téléphone.',
+                    null,
+                    'Erreur',
+                    'Fermer'
+                );
+                }
                 return false;
             });
         </script>

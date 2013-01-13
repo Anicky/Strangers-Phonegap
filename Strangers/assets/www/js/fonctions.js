@@ -49,7 +49,12 @@ function showCallList() {
             }
             $("#listeAppels").html(html);
         }, function() {
-            alert("Une erreur est survenue : le journal d'appels est indisponible.");
+            navigator.notification.alert(
+                "Le journal d'appels est indisponible.",
+                null,
+                'Erreur',
+                'Fermer'
+                );
         },
         "JournalAppels",
         "list",
@@ -62,7 +67,12 @@ function setAccount(json_args) {
         function(retour) {
             ok = true;
         }, function(error) {
-            alert(error);
+            navigator.notification.alert(
+                error,
+                null,
+                'Erreur',
+                'Fermer'
+                );
         },
         "StockageLocal",
         "set",
@@ -76,7 +86,12 @@ function getAccounts() {
         function(listeComptes) {
             comptes = listeComptes;
         }, function(error) {
-            alert("Une erreur est survenue : impossible de récupérer les comptes emails.");
+            navigator.notification.alert(
+                'Impossible de récupérer les comptes emails.',
+                null,
+                'Erreur',
+                'Fermer'
+                );
         },
         "StockageLocal",
         "get",
@@ -115,7 +130,12 @@ function editAccount(id) {
                 $("#compte_port").val(compte['port']);
                 $("#compte_ssl").val(compte['ssl']);
             }, function(error) {
-                alert("Une erreur est survenue : impossible de récupérer le compte email.");
+                navigator.notification.alert(
+                    'Impossible de récupérer le compte email.',
+                    null,
+                    'Erreur',
+                    'Fermer'
+                    );
             },
             "StockageLocal",
             "get",
@@ -133,7 +153,12 @@ function deleteAccount(id) {
                         showAccounts();
                         $("#listeComptes").listview("refresh");
                     }, function(error) {
-                        alert("Une erreur est survenue : impossible de supprimer le compte email.");
+                        navigator.notification.alert(
+                            'Impossible de supprimer le compte email.',
+                            null,
+                            'Erreur',
+                            'Fermer'
+                            );
                     },
                     "StockageLocal",
                     "delete",
