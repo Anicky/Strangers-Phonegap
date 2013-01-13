@@ -51,21 +51,22 @@ function debug_set() {
         "set",
         [
         {
-            email:'martin.dupont@gmail.com', 
-            user:'martin.dupont', 
-            pass:'test1', 
-            server:'imap.googlemail.com', 
-            port:'993', 
-            ssl:'1'
+            "mail":"martin.dupont@gmail.com", 
+            "user":"martin.dupont", 
+            "pass":"test1", 
+            "serv":"imap.googlemail.com", 
+            "port":"993", 
+            "ssl":"1",
+            "boxes":["INBOX", "SENT"]
         },
-
         {
-            email:'jeanne.darc@free.fr', 
-            user:'ja', 
-            pass:'test2', 
-            server:'imap.free.fr', 
-            port:'993', 
-            ssl:'0'
+            "mail":"jeanne.darc@free.fr", 
+            "user":"ja", 
+            "pass":"test2", 
+            "serv":"imap.free.fr", 
+            "port":"993", 
+            "ssl":"0",
+            "boxes":["INBOX"]
         }
         ]);
 }
@@ -75,7 +76,7 @@ function getAccounts() {
         function(listeComptes) {
             var html = "";
             for (i = 0; i < listeComptes.length; i++) {
-                html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + listeComptes[i]['email'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';    
+                html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + listeComptes[i]['mail'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';    
             }
             $("#listeComptes").html(html);
         }, function(error) {
@@ -101,10 +102,10 @@ function editAccount(id) {
     } else {
         cordova.exec(
             function(compte) {
-                $("#compte_email").val(compte['email']);
+                $("#compte_email").val(compte['mail']);
                 $("#compte_user").val(compte['user']);
                 $("#compte_pass").val(compte['pass']);
-                $("#compte_server").val(compte['server']);
+                $("#compte_server").val(compte['serv']);
                 $("#compte_port").val(compte['port']);
                 $("#compte_ssl").val(compte['ssl']);
             }, function(error) {

@@ -51,7 +51,7 @@
             $("#ajout-compte").submit(function(){
                 var formData = $(this).formParams();
                 $.ajax({
-                    type: 'POST',
+                    type: "post",
                     data: $(this).serialize(),
                     url: URL_SERVER + 'tester-compte.php',
                     success: function(d){

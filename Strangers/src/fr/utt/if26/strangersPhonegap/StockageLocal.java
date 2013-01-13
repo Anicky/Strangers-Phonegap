@@ -85,10 +85,10 @@ public class StockageLocal extends CordovaPlugin {
     }
 
     private void set(Properties proprietes, JSONObject compte, int i) throws GeneralSecurityException, JSONException {
-        proprietes.setProperty("account_" + i + ".email", Cryptage.crypter(compte.getString("email")));
+        proprietes.setProperty("account_" + i + ".mail", Cryptage.crypter(compte.getString("mail")));
         proprietes.setProperty("account_" + i + ".user", Cryptage.crypter(compte.getString("user")));
         proprietes.setProperty("account_" + i + ".pass", Cryptage.crypter(compte.getString("pass")));
-        proprietes.setProperty("account_" + i + ".server", Cryptage.crypter(compte.getString("server")));
+        proprietes.setProperty("account_" + i + ".serv", Cryptage.crypter(compte.getString("serv")));
         proprietes.setProperty("account_" + i + ".port", Cryptage.crypter(compte.getString("port")));
         proprietes.setProperty("account_" + i + ".ssl", Cryptage.crypter(compte.getString("ssl")));
     }
@@ -109,10 +109,10 @@ public class StockageLocal extends CordovaPlugin {
 
     private JSONObject get(Properties proprietes, int i) throws IOException, JSONException, GeneralSecurityException {
         JSONObject compte = new JSONObject();
-        compte.put("email", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".email", "")));
+        compte.put("mail", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".mail", "")));
         compte.put("user", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".user", "")));
         compte.put("pass", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".pass", "")));
-        compte.put("server", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".server", "")));
+        compte.put("serv", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".serv", "")));
         compte.put("port", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".port", "")));
         compte.put("ssl", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".ssl", "")));
         return compte;
@@ -128,10 +128,10 @@ public class StockageLocal extends CordovaPlugin {
     }
 
     private void delete(Properties proprietes, int i) throws GeneralSecurityException, JSONException {
-        proprietes.remove("account_" + i + ".email");
+        proprietes.remove("account_" + i + ".mail");
         proprietes.remove("account_" + i + ".user");
         proprietes.remove("account_" + i + ".pass");
-        proprietes.remove("account_" + i + ".server");
+        proprietes.remove("account_" + i + ".serv");
         proprietes.remove("account_" + i + ".port");
         proprietes.remove("account_" + i + ".ssl");
     }
