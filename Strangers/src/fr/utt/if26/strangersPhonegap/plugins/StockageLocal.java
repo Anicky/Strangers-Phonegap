@@ -19,13 +19,13 @@ import org.json.JSONObject;
  * @author JALOUZET Jérémie / OUADGHIRI Mohammed
  */
 public class StockageLocal extends CordovaPlugin {
-    
+
     private final String ACTION_GET = "get";
     private final String ACTION_SET = "set";
     private final String ACTION_DELETE = "delete";
     private final String TAG = "Plugin : StockageLocal";
     private final String SETTINGS_FILE = "settings.properties";
-    
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         Log.d(TAG, "Plugin start");
@@ -73,7 +73,7 @@ public class StockageLocal extends CordovaPlugin {
         Log.d(TAG, "Plugin stop");
         return resultat;
     }
-    
+
     private void set(JSONArray args) throws JSONException, GeneralSecurityException, IOException {
         Properties proprietes = null;
         int lastId = 0;
@@ -84,7 +84,7 @@ public class StockageLocal extends CordovaPlugin {
         }
         if (proprietes != null) {
             String property_lastId = proprietes.getProperty("last_id");
-            
+
             if (property_lastId != null) {
                 lastId = Integer.valueOf(Cryptage.decrypter(property_lastId));
             }
@@ -101,7 +101,7 @@ public class StockageLocal extends CordovaPlugin {
         proprietes.store(cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_PRIVATE), "Configuration Strangers");
         Log.d(TAG, "test4");
     }
-    
+
     private void set(Properties proprietes, JSONObject compte, int i) throws GeneralSecurityException, JSONException {
         proprietes.setProperty("account_" + i + ".mail", Cryptage.crypter(compte.getString("mail")));
         proprietes.setProperty("account_" + i + ".user", Cryptage.crypter(compte.getString("user")));
@@ -111,7 +111,7 @@ public class StockageLocal extends CordovaPlugin {
         proprietes.setProperty("account_" + i + ".ssl", Cryptage.crypter(compte.getString("ssl")));
         proprietes.setProperty("account_" + i + ".boxes", Cryptage.crypter(compte.getString("boxes")));
     }
-    
+
     private JSONArray get() throws JSONException, GeneralSecurityException, IOException {
         JSONArray comptes = new JSONArray();
         Properties proprietes = null;
@@ -131,11 +131,11 @@ public class StockageLocal extends CordovaPlugin {
         }
         return comptes;
     }
-    
+
     private JSONObject get(int i) throws IOException, JSONException, GeneralSecurityException {
         return get(getPropertiesInput(), i);
     }
-    
+
     private JSONObject get(Properties proprietes, int i) throws IOException, JSONException, GeneralSecurityException {
         JSONObject compte = new JSONObject();
         compte.put("mail", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".mail", "")));
@@ -144,10 +144,10 @@ public class StockageLocal extends CordovaPlugin {
         compte.put("serv", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".serv", "")));
         compte.put("port", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".port", "")));
         compte.put("ssl", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".ssl", "0")));
-        compte.put("boxes", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".boxes", "[]")));
+        compte.put("boxes", new JSONArray(Cryptage.decrypter(proprietes.getProperty("account_" + i + ".boxes", "[]"))));
         return compte;
     }
-    
+
     private void delete(int i) throws GeneralSecurityException, JSONException, IOException {
         Properties proprietes = null;
         try {
@@ -160,7 +160,7 @@ public class StockageLocal extends CordovaPlugin {
             proprietes.store(cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_APPEND), "Configuration Strangers");
         }
     }
-    
+
     private void delete(Properties proprietes, int i) throws GeneralSecurityException, JSONException {
         proprietes.remove("account_" + i + ".mail");
         proprietes.remove("account_" + i + ".user");
@@ -170,7 +170,7 @@ public class StockageLocal extends CordovaPlugin {
         proprietes.remove("account_" + i + ".ssl");
         proprietes.remove("account_" + i + ".boxes");
     }
-    
+
     private Properties getPropertiesInput() throws FileNotFoundException, IOException {
         Properties proprietes = new Properties();
         proprietes.load(cordova.getContext().openFileInput(SETTINGS_FILE));
