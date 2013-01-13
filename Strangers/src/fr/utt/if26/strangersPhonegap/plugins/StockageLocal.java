@@ -1,4 +1,4 @@
-package fr.utt.if26.strangersPhonegap;
+package fr.utt.if26.strangersPhonegap.plugins;
 
 import android.content.Context;
 import android.util.Log;

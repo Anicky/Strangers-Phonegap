@@ -52,8 +52,8 @@
         <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
         <plugin name="Echo" value="org.apache.cordova.Echo" />
 
-        <plugin name="JournalAppels" value="fr.utt.if26.strangersPhonegap.JournalAppels" />
-        <plugin name="StockageLocal" value="fr.utt.if26.strangersPhonegap.StockageLocal" />
+        <plugin name="JournalAppels" value="fr.utt.if26.strangersPhonegap.plugins.JournalAppels" />
+        <plugin name="StockageLocal" value="fr.utt.if26.strangersPhonegap.plugins.StockageLocal" />
     </plugins>
 </cordova>
 
