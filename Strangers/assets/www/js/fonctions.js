@@ -1,7 +1,7 @@
 var URL_SERVER = "https://192.168.1.11/strangers/";
 
 $('#options').live('pagecreate', function(event){
-    getAccounts();
+    showAccounts();
 });
 
 $('#journal-appels').live('pagecreate', function(event){
@@ -71,21 +71,28 @@ function setAccount(json_args) {
 }
 
 function getAccounts() {
+    var comptes = null;
     cordova.exec(
         function(listeComptes) {
-            var html = "";
-            for (var i = 0; i < listeComptes.length; i++) {
-                if (listeComptes[i] != null) {
-                    html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + listeComptes[i]['mail'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';  
-                }
-            }
-            $("#listeComptes").html(html);
+            comptes = listeComptes;
         }, function(error) {
             alert("Une erreur est survenue : impossible de récupérer les comptes emails.");
         },
         "StockageLocal",
         "get",
         [""]);
+    return comptes;
+}
+
+function showAccounts() {
+    var comptes = getAccounts();
+    var html = "";
+    for (var i = 0; i < comptes.length; i++) {
+        if (comptes[i] != null) {
+            html += '<li><a href="comptes-ajouter.html?id=' + i + '">' + comptes[i]['mail'] + '</a><a href="#" onclick="deleteAccount(' + i + ')"></a>';  
+        }
+    }
+    $("#listeComptes").html(html);
 }
 
 function addNumber(numero) {
@@ -125,7 +132,7 @@ function deleteAccount(id) {
             if (button == 2) {
                 cordova.exec(
                     function(ok) {
-                        getAccounts();
+                        showAccounts();
                         $("#listeComptes").listview("refresh");
                     }, function(error) {
                         alert("Une erreur est survenue : impossible de supprimer le compte email.");
