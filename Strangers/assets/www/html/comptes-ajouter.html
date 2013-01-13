@@ -49,20 +49,27 @@
         </form>
         <script>
             $("#ajout-compte").submit(function(){
-                var postData = $(this).serialize();
-                alert(postData);
+                var formData = $(this).formParams();
                 $.ajax({
                     type: 'POST',
-                    data: postData,
+                    data: $(this).serialize(),
                     url: URL_SERVER + 'tester-compte.php',
-                    success: function(data){
-                        alert(data);
+                    success: function(d){
+                        d = JSON.parse(d);
+                        if (d.status == "ok") {
+                            formData.boxes = d.boxes;
+                            $.mobile.changePage("comptes-boites.html", {
+                                type: "post",
+                                data : formData
+                            });
+                        } else {
+                            alert("Erreur : impossible de se connecter à votre compte. Veuillez vérifier vos paramètres.")
+                        }
                     },
                     error: function(){
                         alert('Erreur : impossible de contacter le serveur.');
                     }
                 });
-	
                 return false;
             });
         </script>

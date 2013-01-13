@@ -1,4 +1,4 @@
-var URL_SERVER = "https://192.168.0.3/strangers/";
+var URL_SERVER = "https://192.168.1.11/strangers/";
 
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1;
@@ -91,7 +91,7 @@ function addNumber(numero) {
 }
 
 function editAccount(id) {
-    if ((id != 0) && (id == "")) {
+    if (id == null) {
         $("#compte_email").val("");
         $("#compte_user").val("");
         $("#compte_pass").val("");
