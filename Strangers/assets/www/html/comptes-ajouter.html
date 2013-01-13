@@ -63,11 +63,21 @@
                                 data : formData
                             });
                         } else {
-                            alert("Erreur : impossible de se connecter à votre compte. Veuillez vérifier vos paramètres.")
+                            navigator.notification.alert(
+                            'Impossible de se connecter à votre compte. Veuillez vérifier vos paramètres.',
+                            null,
+                            'Erreur',
+                            'Fermer'
+                        );
                         }
                     },
                     error: function(){
-                        alert('Erreur : impossible de contacter le serveur.');
+                        navigator.notification.alert(
+                        'Impossible de contacter le serveur.',
+                        null,
+                        'Erreur',
+                        'Fermer'
+                    );
                     }
                 });
                 return false;

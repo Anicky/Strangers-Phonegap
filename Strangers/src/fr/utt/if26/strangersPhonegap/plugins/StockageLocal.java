@@ -103,6 +103,7 @@ public class StockageLocal extends CordovaPlugin {
     }
 
     private void set(Properties proprietes, JSONObject compte, int i) throws GeneralSecurityException, JSONException {
+        proprietes.setProperty("account_" + i + ".id", Cryptage.crypter(String.valueOf(i)));
         proprietes.setProperty("account_" + i + ".mail", Cryptage.crypter(compte.getString("mail")));
         proprietes.setProperty("account_" + i + ".user", Cryptage.crypter(compte.getString("user")));
         proprietes.setProperty("account_" + i + ".pass", Cryptage.crypter(compte.getString("pass")));
@@ -124,8 +125,11 @@ public class StockageLocal extends CordovaPlugin {
             String property_lastId = proprietes.getProperty("last_id");
             if (property_lastId != null) {
                 int lastId = Integer.valueOf(Cryptage.decrypter(property_lastId));
+                int j = 0;
                 for (int i = 1; i <= lastId; i++) {
-                    comptes.put(i, get(proprietes, i));
+                    if (proprietes.getProperty("account_" + i + ".mail") != null) {
+                        comptes.put(j++, get(proprietes, i));
+                    }
                 }
             }
         }
@@ -138,6 +142,7 @@ public class StockageLocal extends CordovaPlugin {
 
     private JSONObject get(Properties proprietes, int i) throws IOException, JSONException, GeneralSecurityException {
         JSONObject compte = new JSONObject();
+        compte.put("id", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".id", "")));
         compte.put("mail", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".mail", "")));
         compte.put("user", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".user", "")));
         compte.put("pass", Cryptage.decrypter(proprietes.getProperty("account_" + i + ".pass", "")));
@@ -157,11 +162,12 @@ public class StockageLocal extends CordovaPlugin {
         }
         if (proprietes != null) {
             delete(proprietes, i);
-            proprietes.store(cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_APPEND), "Configuration Strangers");
+            proprietes.store(cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_PRIVATE), "Configuration Strangers");
         }
     }
 
     private void delete(Properties proprietes, int i) throws GeneralSecurityException, JSONException {
+        proprietes.remove("account_" + i + ".id");
         proprietes.remove("account_" + i + ".mail");
         proprietes.remove("account_" + i + ".user");
         proprietes.remove("account_" + i + ".pass");

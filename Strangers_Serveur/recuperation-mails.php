@@ -17,20 +17,12 @@
  * name : le prénom et nom de la personne qui envoie (on se base sur l'entête du mail, le "FROM")
  */
 $reponse = '{"status":"error"}';
-if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])) && (isset($_POST['pass'])) && (isset($_POST['num']))) {
-    if (($_POST['serv'] != "") && ($_POST['port'] != "") && ($_POST['user'] != "") && ($_POST['pass'] != "") && ($_POST['num'] != "")) {
-        $serveur = htmlspecialchars($_POST['serv']);
-        $port = htmlspecialchars($_POST['port']);
-        $username = htmlspecialchars($_POST['user']);
-        $password = htmlspecialchars($_POST['pass']);
-        $folders = $_POST['folders'];
-        if (isset($_POST['folders'])) {
-            $folders = $_POST['folders'];
-        }
-        $numero = "";
-        if (isset($_POST['num'])) {
-            $numero = htmlspecialchars($_POST['num']);
-        }
+if ((isset($_POST['params'])) && (isset($_POST['num']))) {
+    if (($_POST['params'] != "") && ($_POST['num'] != "")) {
+        $params_json = $_POST['params'];
+        $numero = htmlspecialchars($_POST['num']);
+
+        $params = json_decode($params_json);
 
         $nombre_emails = 0;
         if (isset($_POST['nb'])) {
@@ -40,8 +32,13 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
             $nombre_emails = 0;
         }
 
+        // Temporaire : il faut parcourir les boites de tous les comptes
+        $serveur = $params[0]->serv;
+        $port = $params[0]->port;
+        $username = $params[0]->user;
+        $password = $params[0]->pass;
         $ssl = "";
-        if (isset($_POST['ssl'])) {
+        if ($params[0]->ssl == "1") {
             $ssl = "/ssl";
         }
 
@@ -122,6 +119,8 @@ if ((isset($_POST['serv'])) && (isset($_POST['port'])) && (isset($_POST['user'])
                 if (!$trouve) {
                     $reponse = '{"status":"not found"}';
                 }
+            } else {
+                $reponse = '{"status":"not found"}';
             }
         }
         imap_close($inbox);
