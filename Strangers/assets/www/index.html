@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Strangers (version Phonegap)</title>
+        <link rel="stylesheet" href="css/jquery-mobile.css" />
+        <script src="js/cordova-2.3.0.js" charset="utf-8"></script>
+        <script src="js/jquery.js" charset="utf-8"></script>
+        <script src="js/jquery-formParams.js" charset="utf-8"></script>
+        <script>
+            $(document).on("mobileinit", function(){
+                $.mobile.defaultPageTransition = 'slide';
+            });
+        </script>
+        <script src="js/jquery-mobile.js" charset="utf-8"></script>
+        <script src="js/fonctions.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div data-role="page" id="accueil">
+            <div data-role="header">
+                <h1>Strangers</h1>
+                <a href="html/comptes-liste.html" data-icon="gear" class="ui-btn-right">Options</a>
+            </div>
+            <div data-role="content">
+                <form id="recherche">
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="accueil_telephone">Numéro de téléphone</label>
+                            <input name="num" id="accueil_telephone" type="tel" />
+                        </fieldset>
+                    </div>
+                    <a data-role="button" href="html/journal-appels.html" data-icon="info" data-iconpos="left">Journal d'appels</a>
+                    <input type="submit" data-icon="search" data-iconpos="left" value="Rechercher" />
+                </form>
+            </div>
+        </div>
+        <script>
+            $("#recherche").submit(function(){
+                if ($("#accueil_telephone").val() != "") {
+                    var formData = $(this).serialize() + "&params=" + JSON.stringify(getAccounts());
+                    $.ajax({
+                        type: "post",
+                        data: formData,
+                        url: URL_SERVER + 'recuperation-mails.php',
+                        success: function(d){
+                            d = JSON.parse(d);
+                            if (d.status == "ok") {
+                                navigator.notification.alert(
+                                'Le numéro appartient à : ' + d.name,
+                                null,
+                                'Résultat',
+                                'Fermer'
+                            );
+                            } else if (d.status == "not found") {
+                                navigator.notification.alert(
+                                "La recherche n'a donné aucun résultat.",
+                                null,
+                                'Résultat',
+                                'Fermer'
+                            );
+                            } else {
+                                navigator.notification.alert(
+                                'Vérifiez les paramètres de vos comptes emails.',
+                                null,
+                                'Erreur',
+                                'Fermer'
+                            );
+                            }
+                        },
+                        error: function(){
+                            navigator.notification.alert(
+                            'Impossible de contacter le serveur.',
+                            null,
+                            'Erreur',
+                            'Fermer'
+                        );
+                        }
+                    });
+                } else {
+                    navigator.notification.alert(
+                    'Vous devez indiquer un numéro de téléphone.',
+                    null,
+                    'Erreur',
+                    'Fermer'
+                );
+                }
+                return false;
+            });
+        </script>
+    </body>
+</html>
