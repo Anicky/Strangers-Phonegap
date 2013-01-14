@@ -33,6 +33,7 @@ if ((isset($_POST['params'])) && (isset($_POST['num']))) {
         }
 
         // Temporaire : il faut parcourir les boites de tous les comptes
+        //stete
         $serveur = $params[0]->serv;
         $port = $params[0]->port;
         $username = $params[0]->user;
