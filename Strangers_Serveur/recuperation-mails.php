@@ -24,7 +24,7 @@ if ((isset($_POST['params'])) && (isset($_POST['num']))) {
 
         $params = json_decode($params_json);
 
-        $nombre_emails = 0;
+        $nombre_emails = 20;
         if (isset($_POST['nb'])) {
             $nombre_emails = htmlspecialchars($_POST['nb']);
         }
