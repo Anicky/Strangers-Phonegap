@@ -95,22 +95,24 @@ public class StockageLocal extends CordovaPlugin {
             set(proprietes, args.getJSONObject(i), lastId + i + 1);
         }
         lastId += args.length();
-        Log.d(TAG, "test2");
         proprietes.setProperty("last_id", Cryptage.crypter(String.valueOf(lastId)));
-        Log.d(TAG, "test3");
         proprietes.store(cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_PRIVATE), "Configuration Strangers");
-        Log.d(TAG, "test4");
     }
 
     private void set(Properties proprietes, JSONObject compte, int i) throws GeneralSecurityException, JSONException {
-        proprietes.setProperty("account_" + i + ".id", Cryptage.crypter(String.valueOf(i)));
-        proprietes.setProperty("account_" + i + ".mail", Cryptage.crypter(compte.getString("mail")));
-        proprietes.setProperty("account_" + i + ".user", Cryptage.crypter(compte.getString("user")));
-        proprietes.setProperty("account_" + i + ".pass", Cryptage.crypter(compte.getString("pass")));
-        proprietes.setProperty("account_" + i + ".serv", Cryptage.crypter(compte.getString("serv")));
-        proprietes.setProperty("account_" + i + ".port", Cryptage.crypter(compte.getString("port")));
-        proprietes.setProperty("account_" + i + ".ssl", Cryptage.crypter(compte.getString("ssl")));
-        proprietes.setProperty("account_" + i + ".boxes", Cryptage.crypter(compte.getString("boxes")));
+        String s = compte.getString("id");
+        int id_account = i;
+        if (!s.isEmpty()) {
+            id_account = Integer.valueOf(s);
+        }
+        proprietes.setProperty("account_" + id_account + ".id", Cryptage.crypter(String.valueOf(id_account)));
+        proprietes.setProperty("account_" + id_account + ".mail", Cryptage.crypter(compte.getString("mail")));
+        proprietes.setProperty("account_" + id_account + ".user", Cryptage.crypter(compte.getString("user")));
+        proprietes.setProperty("account_" + id_account + ".pass", Cryptage.crypter(compte.getString("pass")));
+        proprietes.setProperty("account_" + id_account + ".serv", Cryptage.crypter(compte.getString("serv")));
+        proprietes.setProperty("account_" + id_account + ".port", Cryptage.crypter(compte.getString("port")));
+        proprietes.setProperty("account_" + id_account + ".ssl", Cryptage.crypter(compte.getString("ssl")));
+        proprietes.setProperty("account_" + id_account + ".boxes", Cryptage.crypter(compte.getString("boxes")));
     }
 
     private JSONArray get() throws JSONException, GeneralSecurityException, IOException {

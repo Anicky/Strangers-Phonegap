@@ -120,6 +120,7 @@ function editAccount(id) {
         $("#compte_server").val("");
         $("#compte_port").val("993");
         $("#compte_ssl").val("0");
+        $("#compte_id").val("");
     } else {
         cordova.exec(
             function(compte) {
@@ -129,6 +130,7 @@ function editAccount(id) {
                 $("#compte_server").val(compte['serv']);
                 $("#compte_port").val(compte['port']);
                 $("#compte_ssl").val(compte['ssl']);
+                $("#compte_id").val(compte['id']);
             }, function(error) {
                 navigator.notification.alert(
                     'Impossible de récupérer le compte email.',

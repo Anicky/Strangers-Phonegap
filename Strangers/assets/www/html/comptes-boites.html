@@ -7,12 +7,13 @@
         <h2>Ajouter un compte</h2>
         <form id="selection-boites">
             <div data-role="fieldcontain" id="boites"></div>
-            <input type="hidden" name="mail" value="" id="compte_email" />
-            <input type="hidden" name="user" value="" id="compte_user" />
-            <input type="hidden" name="pass" value="" id="compte_pass" />
-            <input type="hidden" name="serv" value="" id="compte_server" />
-            <input type="hidden" name="port" value="" id="compte_port" />
-            <input type="hidden" name="ssl" value="" id="compte_ssl" />
+            <input type="hidden" name="mail" id="compte_email" />
+            <input type="hidden" name="user" id="compte_user" />
+            <input type="hidden" name="pass" id="compte_pass" />
+            <input type="hidden" name="serv" id="compte_server" />
+            <input type="hidden" name="port" id="compte_port" />
+            <input type="hidden" name="ssl" id="compte_ssl" />
+            <input type="hidden" name="id" id="compte_id" />
             <input data-icon="check" data-iconpos="left" value="Valider" type="submit" />
         </form>
         <script>
@@ -24,6 +25,7 @@
                     $("#compte_server").val(d.options.data.serv);
                     $("#compte_port").val(d.options.data.port);
                     $("#compte_ssl").val(d.options.data.ssl);
+                    $("#compte_id").val(d.options.data.id);
                     var boxes = d.options.data.boxes;
                     var boites = '<fieldset data-role="controlgroup"><legend>Boîtes dans lesquelles rechercher les emails :</legend>';
                     for(var i = 0; i < boxes.length; i++){
