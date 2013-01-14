@@ -13,7 +13,7 @@ if (isset($liste_boites)) {
                         <?php
                         foreach ($liste_boites as $boite) {
                             ?>
-                            <input type="checkbox" name="folders[]" id="folder_<?php echo $boite; ?>" value="<?php echo $boite; ?>" />
+                            <input type="checkbox" name="folders[]" id="folder_<?php echo $boite; ?>" value="<?php echo $boite; ?>" checked="true" />
                             <label for="folder_<?php echo $boite; ?>" class="checkbox"><?php echo $boite; ?></label><br />
                             <?php
                         }
@@ -36,14 +36,19 @@ if (isset($liste_boites)) {
         </form>
         <script>
             $("#formulaire_boites").submit(function(){
-                $("#dialogbox").dialog('open');
+                $("#dialogbox").dialog('open');    
+                var boxes = '';
+                $("input[type=checkbox]:checked").each(function() {
+                    boxes += '"' + $(this).val() + '",';
+                });
+                boxes = boxes.slice(0, -1);       
                 var formData = 'num=' + $('#num').val() +
                     '&params=[{"serv":"' + $('#serv').val() +
                     '","port":"'+ $('#port').val() +
                     '","user":"' + $('#user').val() +
                     '","pass":"'+ $('#pass').val() +
                     '","ssl":"'+ $('#ssl').val() +
-                    '","boxes":["INBOX"]}]';
+                    '","boxes":[' + boxes + ']}]';
                 $.ajax({
                     type: "post",
                     data: formData,
