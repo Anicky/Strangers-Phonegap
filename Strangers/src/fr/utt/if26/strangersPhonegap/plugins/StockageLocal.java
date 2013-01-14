@@ -99,7 +99,7 @@ public class StockageLocal extends CordovaPlugin {
         proprietes.store(cordova.getContext().openFileOutput(SETTINGS_FILE, Context.MODE_PRIVATE), "Configuration Strangers");
     }
 
-    private void set(Properties proprietes, JSONObject compte, int i) throws GeneralSecurityException, JSONException {
+    private void set(Properties proprietes, JSONObject compte, int i) throws GeneralSecurityException, JSONException, IOException {
         String s = compte.getString("id");
         int id_account = i;
         if (!s.isEmpty()) {
