@@ -1,4 +1,4 @@
-var URL_SERVER = "https://192.168.1.11/strangers/";
+var URL_SERVER = "https://192.168.2.13/strangers/";
 
 $('#options').live('pagecreate', function(event){
     showAccounts();
@@ -119,7 +119,7 @@ function editAccount(id) {
         $("#compte_pass").val("");
         $("#compte_server").val("");
         $("#compte_port").val("993");
-        $("#compte_ssl").val("0");
+        $("#compte_ssl").val("1");
         $("#compte_id").val("");
     } else {
         cordova.exec(

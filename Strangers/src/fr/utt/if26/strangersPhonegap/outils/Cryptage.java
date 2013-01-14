@@ -11,7 +11,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import javax.crypto.Cipher;
-import javax.crypto.spec.PBEParameterSpec;
 
 /**
  * Outils de cryptage/décryptage symétrique avec clé
@@ -22,7 +21,6 @@ public class Cryptage {
 
     private static final String KEYSTORE_PASSWORD = "dfh10ZR49";
     private static final String PASSWORD = "7e3Gz0167";
-    private static final String SALT = "lzer43QEtg";
 
     private static Key getKey() throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException, CertificateException, IOException {
         KeyStore ks = KeyStore.getInstance("BKS");
@@ -31,15 +29,15 @@ public class Cryptage {
     }
 
     public static String crypter(String property) throws GeneralSecurityException, KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException, CertificateException, IOException {
-        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
-        pbeCipher.init(Cipher.ENCRYPT_MODE, getKey(), new PBEParameterSpec(base64Decode(SALT), 20));
-        return base64Encode(pbeCipher.doFinal(property.getBytes()));
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, getKey());
+        return base64Encode(cipher.doFinal(property.getBytes()));
     }
 
     public static String decrypter(String property) throws GeneralSecurityException, KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException, CertificateException, IOException {
-        Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
-        pbeCipher.init(Cipher.DECRYPT_MODE, getKey(), new PBEParameterSpec(base64Decode(SALT), 20));
-        return new String(pbeCipher.doFinal(base64Decode(property)));
+        Cipher cipher = Cipher.getInstance("AES");
+         cipher.init(Cipher.DECRYPT_MODE, getKey());
+         return new String(cipher.doFinal(base64Decode(property)));
     }
 
     private static String base64Encode(byte[] bytes) {

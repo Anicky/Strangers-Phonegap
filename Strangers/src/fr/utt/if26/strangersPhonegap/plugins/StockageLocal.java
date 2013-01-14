@@ -1,11 +1,15 @@
 package fr.utt.if26.strangersPhonegap.plugins;
 
 import android.content.Context;
+import android.util.Base64;
 import android.util.Log;
+import fr.utt.if26.strangersPhonegap.Strangers;
 import fr.utt.if26.strangersPhonegap.outils.Cryptage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.security.Key;
+import java.security.KeyStore;
 import java.util.Properties;
 import org.apache.cordova.api.CallbackContext;
 import org.apache.cordova.api.CordovaPlugin;
@@ -115,26 +119,52 @@ public class StockageLocal extends CordovaPlugin {
         proprietes.setProperty("account_" + id_account + ".boxes", Cryptage.crypter(compte.getString("boxes")));
     }
 
-    private JSONArray get() throws JSONException, GeneralSecurityException, IOException {
-        JSONArray comptes = new JSONArray();
-        Properties proprietes = null;
-        try {
-            proprietes = getPropertiesInput();
-        } catch (FileNotFoundException ex) {
-            Log.d(TAG, ex.getLocalizedMessage());
-        }
-        if (proprietes != null) {
-            String property_lastId = proprietes.getProperty("last_id");
-            if (property_lastId != null) {
-                int lastId = Integer.valueOf(Cryptage.decrypter(property_lastId));
-                int j = 0;
-                for (int i = 1; i <= lastId; i++) {
-                    if (proprietes.getProperty("account_" + i + ".mail") != null) {
-                        comptes.put(j++, get(proprietes, i));
-                    }
+    private void showS(String s) {
+        if (s != null) {
+                if (!s.isEmpty()) {
+                    Log.d(TAG, s);
+                } else {
+                    Log.d(TAG, "s is empty");
                 }
+            } else {
+                Log.d(TAG, "s is null");
             }
+    }
+    
+    private JSONArray get() throws JSONException, GeneralSecurityException, IOException {
+        try {
+            String s = "tant pis si ça marche pas";
+            showS(s);
+
+            s = Cryptage.crypter(s);
+            showS(s);
+
+            s = Cryptage.decrypter(s);
+            showS(s);
+        } catch (Exception e) {
+            Log.e(TAG, e.getLocalizedMessage());
         }
+
+        JSONArray comptes = new JSONArray();
+        /*
+         Properties proprietes = null;
+         try {
+         proprietes = getPropertiesInput();
+         } catch (FileNotFoundException ex) {
+         Log.d(TAG, ex.getLocalizedMessage());
+         }
+         if (proprietes != null) {
+         String property_lastId = proprietes.getProperty("last_id");
+         if (property_lastId != null) {
+         int lastId = Integer.valueOf(Cryptage.decrypter(property_lastId));
+         int j = 0;
+         for (int i = 1; i <= lastId; i++) {
+         if (proprietes.getProperty("account_" + i + ".mail") != null) {
+         comptes.put(j++, get(proprietes, i));
+         }
+         }
+         }
+         }*/
         return comptes;
     }
 
