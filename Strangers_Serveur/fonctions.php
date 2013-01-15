@@ -1,6 +1,6 @@
 <?php
 
-/**pe $server L'adresse du serveur
+/* * pe $server L'adresse du serveur
  * @param type $port Le numéro de port
  * @param type $ssl Indique si la connexion est en SSL
  * @param type $folder Le dossier à ouvrir
@@ -12,6 +12,7 @@
  * @param type $folder Le dossier à ouvrir
  * @return type
  */
+
 function get_hostname($server, $port, $ssl = "", $folder = "") {
     return '{' . $server . ':' . $port . '/imap' . $ssl . '}' . $folder;
 }
@@ -48,6 +49,10 @@ function remplace_accents_imap($objet) {
         '&AMk-' => 'É',
         '&AOs-' => 'ë');
     return str_replace(array_keys($accents), array_values($accents), $objet);
+}
+
+function decode_imap_from($str) {
+    return imap_mime_header_decode($str)[0]->text;
 }
 
 ?>

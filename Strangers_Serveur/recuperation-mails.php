@@ -7,7 +7,8 @@
  * (optionnel) nb : Nombre de mails à récupérer (du + récent au + ancien)
  * Réponse :
  * status : 'error' si une erreur s'est produite, 'not found' si le numéro n'a pas été trouvé, 'ok' si un numéro a été trouvé
- * name : le prénom et nom de la personne qui envoie (on se base sur l'entête du mail, le "FROM")
+ * firstname : le prénom de la personne qui envoie (on se base sur l'entête du mail, le "FROM")
+ * lastname : le nom de la personne qui envoie (on se base sur l'entête du mail, le "FROM")
  */
 $reponse = '{"status":"error"}';
 if ((isset($_POST['params'])) && (isset($_POST['num']))) {
@@ -15,6 +16,7 @@ if ((isset($_POST['params'])) && (isset($_POST['num']))) {
         require_once("fonctions.php");
         $reponse = '{"status":"not found"}';
         $trouve = false;
+        $prenom = "";
         $nom = "";
         $params = json_decode($_POST['params']);
         $limite_emails = 0;
@@ -68,7 +70,12 @@ if ((isset($_POST['params'])) && (isset($_POST['num']))) {
                             $apercu = imap_fetch_overview($inbox, $numero_email, 0);
                             $message = imap_fetchbody($inbox, $numero_email, 1, FT_PEEK);
                             if (preg_match($regexp, $message)) {
-                                $nom = $apercu[0]->from;
+                                $expediteur_array = explode("<", decode_imap_from($apercu[0]->from));
+                                $expediteur = explode(" ", $expediteur_array[0]);
+                                $prenom = $expediteur[0];
+                                if (count($expediteur) > 1) {
+                                    $nom = $expediteur[1];
+                                }
                                 $trouve = true;
                             }
                             $compteur_emails++;
@@ -81,7 +88,7 @@ if ((isset($_POST['params'])) && (isset($_POST['num']))) {
             $compteur_comptes++;
         }
         if ($trouve) {
-            $reponse = '{"status":"ok","name":"' . $nom . '"}';
+            $reponse = '{"status":"ok","firstname":"' . $prenom . '","lastname":"' . $nom . '"}';
         }
     }
 }

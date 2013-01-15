@@ -13,7 +13,7 @@ if (isset($liste_boites)) {
                         <?php
                         foreach ($liste_boites as $boite) {
                             ?>
-                            <input type="checkbox" name="folders[]" id="folder_<?php echo $boite; ?>" value="<?php echo $boite; ?>" checked="true" />
+                            <input type="checkbox" name="folders[]" id="folder_<?php echo $boite; ?>" value="<?php echo $boite; ?>"<?php if ($boite == "INBOX") { echo ' checked="true"'; } ?> />
                             <label for="folder_<?php echo $boite; ?>" class="checkbox"><?php echo $boite; ?></label><br />
                             <?php
                         }
@@ -55,14 +55,15 @@ if (isset($liste_boites)) {
                     url: '../recuperation-mails.php',
                     success: function(d){
                         $("#dialogbox").dialog('close');
-                        d = JSON.parse(d);
+                        $("#conteneur").html(d);
+                        /*d = JSON.parse(d);
                         if (d.status == "ok") {
                             $("#conteneur").html("Le numéro appartient à : " + d.name);
                         } else if (d.status == "not found") {
                             $("#conteneur").html("La recherche n'a donné aucun résultat.");
                         } else {
                             $("#conteneur").html("Vérifiez les paramètres de vos comptes emails.");
-                        }
+                        }*/
                     },
                     error: function(){
                         $("#dialogbox").dialog('close');

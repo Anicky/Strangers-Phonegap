@@ -1,5 +1,5 @@
 <div data-role="page" id="comptes-boites">
-    <div data-role="header">
+    <div data-role="header" data-position="fixed">
         <a href="comptes-liste.html" data-icon="back">Annuler</a>
         <h1>Strangers</h1>
     </div>
@@ -29,7 +29,11 @@
                     var boxes = d.options.data.boxes;
                     var boites = '<fieldset data-role="controlgroup"><legend>Boîtes dans lesquelles rechercher les emails :</legend>';
                     for(var i = 0; i < boxes.length; i++){
-                        boites += '<input type="checkbox" name="boxes[]" id="boite_' + i + '" class="custom" value="' + boxes[i] + '" checked="true" />';
+                        boites += '<input type="checkbox" name="boxes[]" id="boite_' + i + '" class="custom" value="' + boxes[i] + '"';
+                        if (boxes[i] == "INBOX") {
+                            boites += ' checked="true"';
+                        }
+                        boites      += ' />';
                         boites += '<label for="boite_' + i + '">' + boxes[i] + '</label>';
                     }
                     boites += '</fieldset>';

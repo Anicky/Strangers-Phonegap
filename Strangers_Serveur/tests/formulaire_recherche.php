@@ -49,8 +49,8 @@
             <td class="label">
                 <label for="nb">Nombre d'emails à récupérer<br />(A partir du + récent / Mettre 0 pour "tous")</label>
             </td>
-            <td><!-- par défaut : La recherche dans les 10 dernier mails reçus-->
-                <input type="number" name="nb" id="nb" value="10" size="5" />
+            <td>
+                <input type="number" name="nb" id="nb" value="0" size="5" />
             </td>
             <td></td>
         </tr>

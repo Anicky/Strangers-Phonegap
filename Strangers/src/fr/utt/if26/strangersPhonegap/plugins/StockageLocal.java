@@ -1,7 +1,6 @@
 package fr.utt.if26.strangersPhonegap.plugins;
 
 import android.content.Context;
-import android.util.Log;
 import fr.utt.if26.strangersPhonegap.outils.Cryptage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,54 +22,40 @@ public class StockageLocal extends CordovaPlugin {
     private final String ACTION_GET = "get";
     private final String ACTION_SET = "set";
     private final String ACTION_DELETE = "delete";
-    private final String TAG = "Plugin : StockageLocal";
     private final String SETTINGS_FILE = "settings.properties";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "Plugin start");
         boolean resultat = true;
         if (action.equals(ACTION_GET)) {
-            Log.d(TAG, "Action : Get");
             try {
                 if (args.getString(0).isEmpty()) {
                     JSONArray comptes = get();
-                    Log.d(TAG, "Returns :  " + comptes);
                     callbackContext.success(comptes);
                 } else {
                     JSONObject compte = get(args.getInt(0));
-                    Log.d(TAG, "Returns :  " + compte);
                     callbackContext.success(compte);
                 }
             } catch (FileNotFoundException ex) {
-                Log.d(TAG, ex.getLocalizedMessage());
                 callbackContext.success("");
             } catch (Exception ex) {
-                Log.e(TAG, ex.getLocalizedMessage());
                 callbackContext.error(0);
             }
         } else if (action.equals(ACTION_SET)) {
-            Log.d(TAG, "Action : Set");
             try {
                 set(args);
-                Log.d(TAG, "Donnees sauvegardees");
                 callbackContext.success();
             } catch (Exception ex) {
-                Log.e(TAG, ex.getLocalizedMessage());
                 callbackContext.error(0);
             }
         } else if (action.equals(ACTION_DELETE)) {
-            Log.d(TAG, "Action : Delete");
             try {
                 delete(args.getInt(0));
                 callbackContext.success();
             } catch (Exception ex) {
-                Log.e(TAG, ex.getLocalizedMessage());
                 callbackContext.error(0);
             }
-            Log.d(TAG, "Donnees supprimees");
         }
-        Log.d(TAG, "Plugin stop");
         return resultat;
     }
 
@@ -80,7 +65,6 @@ public class StockageLocal extends CordovaPlugin {
         try {
             proprietes = getPropertiesInput();
         } catch (FileNotFoundException ex) {
-            Log.d(TAG, ex.getLocalizedMessage());
         }
         if (proprietes != null) {
             String property_lastId = proprietes.getProperty("last_id");
@@ -115,25 +99,12 @@ public class StockageLocal extends CordovaPlugin {
         proprietes.setProperty("account_" + id_account + ".boxes", Cryptage.crypter(compte.getString("boxes")));
     }
 
-    private void showS(String s) {
-        if (s != null) {
-            if (!s.isEmpty()) {
-                Log.d(TAG, s);
-            } else {
-                Log.d(TAG, "s is empty");
-            }
-        } else {
-            Log.d(TAG, "s is null");
-        }
-    }
-
     private JSONArray get() throws JSONException, GeneralSecurityException, IOException {
         JSONArray comptes = new JSONArray();
         Properties proprietes = null;
         try {
             proprietes = getPropertiesInput();
         } catch (FileNotFoundException ex) {
-            Log.d(TAG, ex.getLocalizedMessage());
         }
         if (proprietes != null) {
             String property_lastId = proprietes.getProperty("last_id");
@@ -172,7 +143,6 @@ public class StockageLocal extends CordovaPlugin {
         try {
             proprietes = getPropertiesInput();
         } catch (FileNotFoundException ex) {
-            Log.d(TAG, ex.getLocalizedMessage());
         }
         if (proprietes != null) {
             delete(proprietes, i);

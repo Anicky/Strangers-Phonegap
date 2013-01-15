@@ -3,7 +3,6 @@ package fr.utt.if26.strangersPhonegap.plugins;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog;
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,24 +19,18 @@ import org.json.JSONException;
 public class JournalAppels extends CordovaPlugin {
 
     private final String ACTION_LIST = "list";
-    private final String TAG = "Plugin : JournalAppels";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "Plugin start");
         boolean resultat = true;
         if (action.equals(ACTION_LIST)) {
-            Log.d(TAG, "Action : List");
             try {
                 JSONArray listeAppels = list();
-                Log.d(TAG, "Returns :  " + listeAppels);
                 callbackContext.success(listeAppels);
             } catch (Exception e) {
-                Log.d(TAG, "Error : " + e.getLocalizedMessage());
                 resultat = false;
             }
         }
-        Log.d(TAG, "Plugin stop");
         return resultat;
     }
 

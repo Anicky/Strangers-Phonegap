@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Strangers (version Phonegap)</title>
         <link rel="stylesheet" href="css/jquery-mobile.css" />
+        <link rel="stylesheet" href="css/strangers.css" />
         <script src="js/cordova-2.3.0.js" charset="utf-8"></script>
         <script src="js/jquery.js" charset="utf-8"></script>
         <script src="js/jquery-formParams.js" charset="utf-8"></script>
@@ -18,7 +19,7 @@
     </head>
     <body>
         <div data-role="page" id="accueil">
-            <div data-role="header">
+            <div data-role="header" data-position="fixed">
                 <h1>Strangers</h1>
                 <a href="html/comptes-liste.html" data-icon="gear" class="ui-btn-right">Options</a>
             </div>
@@ -35,22 +36,45 @@
                 </form>
             </div>
         </div>
+        <div data-role="dialog" id="loading" data-overlay-theme="e">
+            <p>
+                Recherche du propriétaire du numéro en cours...<br /><br />
+                La recherche peut prendre un peu de temps.
+            </p>
+            <img src="css/images/ajax-loader.gif" alt="Veuillez patienter" />
+        </div>
         <script>
             $("#recherche").submit(function(){
                 if ($("#accueil_telephone").val() != "") {
                     var formData = $(this).serialize() + "&params=" + JSON.stringify(getAccounts());
+                    $.mobile.changePage('#loading', {transition: 'pop', role: 'dialog'});
                     $.ajax({
                         type: "post",
                         data: formData,
                         url: URL_SERVER + 'recuperation-mails.php',
                         success: function(d){
+                            $("#loading").dialog('close');
                             d = JSON.parse(d);
                             if (d.status == "ok") {
-                                navigator.notification.alert(
-                                'Le numéro appartient à : ' + d.name,
-                                null,
+                                navigator.notification.confirm(
+                                'Le numéro appartient à : ' + d.firstname + ' ' + d.lastname,
+                                function(button) {
+                                    if (button == 2) {
+                                        var contact = navigator.contacts.create();
+                                        contact.displayName = d.firstname + ' ' + d.lastname;
+                                        contact.nickname = d.firstname + ' ' + d.lastname;
+                                        var name = new ContactName();
+                                        name.givenName = d.firstname;
+                                        name.familyName = d.lastname;
+                                        contact.name = name;
+                                        var phoneNumbers = [];
+                                        phoneNumbers[0] = new ContactField('mobile', $("#accueil_telephone").val(), true);
+                                        contact.phoneNumbers = phoneNumbers;
+                                        contact.save(onSaveSuccess,onSaveError);
+                                    }
+                                },
                                 'Résultat',
-                                'Fermer'
+                                'Fermer,Ajouter le contact'
                             );
                             } else if (d.status == "not found") {
                                 navigator.notification.alert(
@@ -69,6 +93,7 @@
                             }
                         },
                         error: function(){
+                            $("#loading").dialog('close');
                             navigator.notification.alert(
                             'Impossible de contacter le serveur.',
                             null,
@@ -87,6 +112,22 @@
                 }
                 return false;
             });
+            function onSaveSuccess(contact) {
+                navigator.notification.alert(
+                "Le contact a bien été ajouté dans le répertoire.",
+                null,
+                'Ajout du contact',
+                'Fermer'
+            );
+            }
+            function onSaveError(contactError) {
+                navigator.notification.alert(
+                "Erreur : " + contactError.code,
+                null,
+                'Ajout du contact',
+                'Fermer'
+            );
+            }
         </script>
     </body>
 </html>
